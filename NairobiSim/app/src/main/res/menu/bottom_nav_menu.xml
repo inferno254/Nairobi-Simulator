@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="@string/tab_dashboard" />
+
+    <item
+        android:id="@+id/nav_businesses"
+        android:icon="@drawable/ic_business"
+        android:title="@string/tab_businesses" />
+
+    <item
+        android:id="@+id/nav_finances"
+        android:icon="@drawable/ic_finance"
+        android:title="@string/tab_finances" />
+
+    <item
+        android:id="@+id/nav_loans"
+        android:icon="@drawable/ic_loan"
+        android:title="@string/tab_loans" />
+
+    <item
+        android:id="@+id/nav_chama"
+        android:icon="@drawable/ic_chama"
+        android:title="@string/tab_chama" />
+
+    <item
+        android:id="@+id/nav_events"
+        android:icon="@drawable/ic_events"
+        android:title="@string/tab_events" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/tab_settings" />
+
+</menu>

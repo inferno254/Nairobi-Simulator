@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="loanType"
+            type="com.nairobisim.model.LoanType" />
+        <variable
+            name="isSelected"
+            type="Boolean" />
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="@{isSelected ? 4f : 1f}"
+        app:strokeColor="@{isSelected ? @color/nairobi_blue : @color/nairobi_grey_light}"
+        app:strokeWidth="@{isSelected ? 2f : 0f}"
+        android:onClick="@{onClick}"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="@color/nairobi_blue_light">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_loan"
+                    android:tint="@color/nairobi_blue" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{loanType.name}"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="Business Loan" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@{loanType.description}"
+                    android:textSize="12sp"
+                    android:textColor="@color/nairobi_grey"
+                    tools:text="Standard business financing" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{\"KES \" + loanType.minAmount / 1000 + \"K - \" + loanType.maxAmount / 1000 + \"K\"}"
+                            android:textSize="11sp"
+                            android:textColor="@color/nairobi_green"
+                            tools:text="KES 100K - 5M" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@{(loanType.interestRate * 100).toInt() + \"% APR\"}"
+                            android:textSize="11sp"
+                            android:textColor="@color/nairobi_orange"
+                            tools:text="14% APR" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="@{loanType.minTerm + \"-\" + loanType.maxTerm + \" months\"}"
+                            android:textSize="11sp"
+                            android:textColor="@color/nairobi_grey"
+                            tools:text="12-60 months" />
+
+                    </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_check"
+                android:tint="@color/nairobi_blue"
+                android:visibility="@{isSelected ? View.VISIBLE : View.GONE}" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

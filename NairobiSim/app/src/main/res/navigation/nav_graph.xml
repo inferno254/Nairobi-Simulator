@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.nairobisim.ui.dashboard.DashboardFragment"
+        android:label="@string/tab_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/businessesFragment"
+        android:name="com.nairobisim.ui.businesses.BusinessesFragment"
+        android:label="@string/tab_businesses"
+        tools:layout="@layout/fragment_businesses" />
+
+    <fragment
+        android:id="@+id/financesFragment"
+        android:name="com.nairobisim.ui.finances.FinancesFragment"
+        android:label="@string/tab_finances"
+        tools:layout="@layout/fragment_finances" />
+
+    <fragment
+        android:id="@+id/loansFragment"
+        android:name="com.nairobisim.ui.loans.LoansFragment"
+        android:label="@string/tab_loans"
+        tools:layout="@layout/fragment_loans" />
+
+    <fragment
+        android:id="@+id/chamaFragment"
+        android:name="com.nairobisim.ui.chama.ChamaFragment"
+        android:label="@string/tab_chama"
+        tools:layout="@layout/fragment_chama" />
+
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.nairobisim.ui.events.EventsFragment"
+        android:label="@string/tab_events"
+        tools:layout="@layout/fragment_events" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.nairobisim.ui.settings.SettingsFragment"
+        android:label="@string/tab_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/businessDetailFragment"
+        android:name="com.nairobisim.ui.businesses.BusinessDetailFragment"
+        android:label="@string/business_detail"
+        tools:layout="@layout/fragment_business_detail">
+        <argument
+            android:name="businessId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/startBusinessFragment"
+        android:name="com.nairobisim.ui.businesses.StartBusinessFragment"
+        android:label="@string/start_business"
+        tools:layout="@layout/fragment_start_business" />
+
+    <fragment
+        android:id="@+id/loanApplicationFragment"
+        android:name="com.nairobisim.ui.loans.LoanApplicationFragment"
+        android:label="@string/apply_loan"
+        tools:layout="@layout/fragment_loan_application" />
+
+</navigation>

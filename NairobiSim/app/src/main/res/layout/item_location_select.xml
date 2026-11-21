@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="location"
+            type="com.nairobisim.model.NairobiArea" />
+        <variable
+            name="isSelected"
+            type="Boolean" />
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="@{isSelected ? 4f : 1f}"
+        app:strokeColor="@{isSelected ? @color/nairobi_blue : @color/nairobi_grey_light}"
+        app:strokeWidth="@{isSelected ? 2f : 0f}"
+        android:onClick="@{onClick}"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="@color/nairobi_blue_light">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_location"
+                    android:tint="@color/nairobi_blue" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{location.displayName}"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="CBD" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@{\"Demand: \" + (location.demandMultiplier * 100).toInt() + \"% | Rent: \" + (location.rentMultiplier * 100).toInt() + \"% | Competition: \" + (location.competitionLevel * 100).toInt() + \"%\"}"
+                    android:textSize="12sp"
+                    android:textColor="@color/nairobi_grey"
+                    tools:text="Demand: 120% | Rent: 150% | Competition: 100%" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_check"
+                android:tint="@color/nairobi_blue"
+                android:visibility="@{isSelected ? View.VISIBLE : View.GONE}" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

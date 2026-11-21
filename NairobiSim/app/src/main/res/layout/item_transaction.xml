@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="transaction"
+            type="com.nairobisim.model.DailyTransaction" />
+        <variable
+            name="viewModel"
+            type="com.nairobisim.ui.main.MainViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp 16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@{transaction.type == com.nairobisim.model.TransactionType.INCOME ? @color/income_green : transaction.type == com.nairobisim.model.TransactionType.EXPENSE ? @color/expense_red : transaction.type == com.nairobisim.model.TransactionType.INVESTMENT ? @color/investment_blue : transaction.type == com.nairobisim.model.TransactionType.LOAN ? @color/loan_orange : @color/nairobi_grey}">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@{transaction.type == com.nairobisim.model.TransactionType.INCOME ? @drawable/ic_arrow_up : transaction.type == com.nairobisim.model.TransactionType.EXPENSE ? @drawable/ic_arrow_down : @drawable/ic_swap}"
+                android:tint="@color/nairobi_white" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{transaction.description}"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Collected from Matatu Sacco" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{transaction.category + \" • \" + transaction.date}"
+                android:textSize="11sp"
+                android:textColor="@color/nairobi_grey"
+                tools:text="Transport • Dec 21, 2024" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.formatKes(transaction.amount)}"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@{transaction.type == com.nairobisim.model.TransactionType.INCOME ? @color/income_green : transaction.type == com.nairobisim.model.TransactionType.EXPENSE ? @color/expense_red : @color/nairobi_blue}"
+                tools:text="+KES 120,000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{@string/kes_balance + \" \" + viewModel.formatKes(transaction.balanceAfter)}"
+                android:textSize="11sp"
+                android:textColor="@color/nairobi_grey"
+                tools:text="Balance: KES 250,000" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

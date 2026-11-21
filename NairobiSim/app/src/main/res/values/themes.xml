@@ -1,0 +1,34 @@
+<resources>
+    <style name="Theme.NairobiSim" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/nairobi_green</item>
+        <item name="colorPrimaryVariant">@color/nairobi_green_dark</item>
+        <item name="colorOnPrimary">@color/nairobi_white</item>
+        <item name="colorSecondary">@color/nairobi_orange</item>
+        <item name="colorSecondaryVariant">@color/nairobi_yellow</item>
+        <item name="colorOnSecondary">@color/nairobi_black</item>
+        <item name="colorSurface">@color/nairobi_white</item>
+        <item name="colorOnSurface">@color/nairobi_black</item>
+        <item name="colorError">@color/nairobi_red</item>
+        <item name="colorOnError">@color/nairobi_white</item>
+        <item name="android:statusBarColor">@color/nairobi_green_dark</item>
+        <item name="android:navigationBarColor">@color/nairobi_white</item>
+    </style>
+
+    <style name="Theme.NairobiSim.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NairobiSim.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar" />
+    <style name="Theme.NairobiSim.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
+
+    <style name="Widget.NairobiSim.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemIconTint">@color/bottom_nav_selector</item>
+        <item name="itemTextColor">@color/bottom_nav_selector</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.NairobiSim.BottomNavigationView.ActiveIndicator</item>
+    </style>
+
+    <style name="Widget.NairobiSim.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/nairobi_green_light</item>
+    </style>
+</resources>

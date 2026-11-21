@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="chama"
+            type="com.nairobisim.model.Chama" />
+        <variable
+            name="viewModel"
+            type="com.nairobisim.ui.main.MainViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:strokeColor="@color/nairobi_green"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="12dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardBackgroundColor="@color/nairobi_green_light">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_chama"
+                            android:tint="@color/nairobi_green" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{chama.name}"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:text="Jua Kali Investors Chama" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@{\"Members: \" + chama.members.size + \" | Cycle: \" + chama.cycleDuration + \" months\"}"
+                            android:textSize="12sp"
+                            android:textColor="@color/nairobi_grey"
+                            tools:text="Members: 15 | Cycle: 12 months" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="end">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.formatKes(chama.totalPool)}"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/income_green"
+                            tools:text="KES 2,500,000" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Pool Value"
+                            android:textSize="11sp"
+                            android:textColor="@color/nairobi_grey" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{\"Monthly: \" + viewModel.formatKes(chama.monthlyContribution)}"
+                        android:textSize="13sp"
+                        android:textColor="@color/expense_red"
+                        tools:text="Monthly: KES 15,000" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{\"My Share: \" + viewModel.formatKes(chama.memberShares[chama.members.firstOrNull()?.id ?: \"\"] ?: 0L)}"
+                        android:textSize="13sp"
+                        android:textColor="@color/nairobi_blue"
+                        android:gravity="center"
+                        tools:text="My Share: KES 200,000" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@{\"Next Payout: \" + chama.nextPayoutDate}"
+                        android:textSize="13sp"
+                        android:textColor="@color/nairobi_grey"
+                        android:gravity="end"
+                        tools:text="Next Payout: Dec 15" />
+
+                </LinearLayout>
+
+                <android.widget.ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="12dp"
+                    style="@style/Widget.Material3.ProgressBar.Horizontal"
+                    android:progress="@{(100 * chama.currentCycle / chama.cycleDuration).toInt()}"
+                    android:progressTint="@color/nairobi_green"
+                    android:progressBackgroundTint="@color/nairobi_grey_light"
+                    tools:progress="40" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
