@@ -92,4 +92,24 @@
     <color name="color_on_tertiary_container">#740000</color>
     <color name="color_error_container">#F9DCDC</color>
     <color name="color_on_error_container">#690005</color>
+
+    <!-- Category accent colors (Business Empire style) -->
+    <color name="cat_matatu">#F7B731</color>
+    <color name="cat_kiosk">#20BF6B</color>
+    <color name="cat_butchery">#EB3B5A</color>
+    <color name="cat_grocery">#26DE81</color>
+    <color name="cat_hardware">#40739E</color>
+    <color name="cat_agrovet">#10AC84</color>
+    <color name="cat_cyber">#2C7DFE</color>
+    <color name="cat_carwash">#4B7BEC</color>
+    <color name="cat_salon">#8778EE</color>
+    <color name="cat_restaurant">#FC5C65</color>
+    <color name="cat_bodaboda">#FECA57</color>
+    <color name="cat_events">#A55EEA</color>
+    <color name="cat_water">#45AAF2</color>
+    <color name="cat_charcoal">#6D4C41</color>
+    <color name="cat_clothes">#E84393</color>
+    <color name="cat_posho">#B8A9C9</color>
+    <color name="cat_farm">#55A630</color>
+    <color name="cat_default">#1A8A3A</color>
 </resources>

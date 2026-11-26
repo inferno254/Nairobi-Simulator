@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.nairobisim.data.repository.SimulationRepository
+import com.nairobisim.R
 import com.nairobisim.model.*
 import kotlinx.coroutines.launch
 import java.util.*
@@ -311,6 +312,43 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun formatHourly(amountPerHour: Double): String {
         return "KES ${String.format("%,d", amountPerHour.toLong())} /hr"
+    }
+
+    fun categoryColor(category: BusinessCategory): Int = when (category) {
+        BusinessCategory.MATATU_SACCO -> R.color.cat_matatu
+        BusinessCategory.KIOSK -> R.color.cat_kiosk
+        BusinessCategory.BUTCHERY -> R.color.cat_butchery
+        BusinessCategory.GREEN_GROCERY -> R.color.cat_grocery
+        BusinessCategory.HARDWARE -> R.color.cat_hardware
+        BusinessCategory.AGROVET -> R.color.cat_agrovet
+        BusinessCategory.CYBER_CAFE -> R.color.cat_cyber
+        BusinessCategory.CAR_WASH -> R.color.cat_carwash
+        BusinessCategory.SALON_BARBERSHOP -> R.color.cat_salon
+        BusinessCategory.RESTAURANT -> R.color.cat_restaurant
+        BusinessCategory.BODABODA_FLEET -> R.color.cat_bodaboda
+        BusinessCategory.EVENT_TENT_HIRE -> R.color.cat_events
+        BusinessCategory.WATER_VENDING -> R.color.cat_water
+        BusinessCategory.CHARCOAL_DEALER -> R.color.cat_charcoal
+        BusinessCategory.SECOND_HAND_CLOTHES -> R.color.cat_clothes
+        BusinessCategory.POSHO_MILL -> R.color.cat_posho
+        BusinessCategory.DAIRY_FARM -> R.color.cat_farm
+        BusinessCategory.POULTRY_FARM -> R.color.cat_farm
+        BusinessCategory.FISH_FARM -> R.color.cat_farm
+        BusinessCategory.HORTICULTURE -> R.color.cat_farm
+    }
+
+    fun categoryIcon(category: BusinessCategory): Int = when (category) {
+        BusinessCategory.MATATU_SACCO, BusinessCategory.CAR_WASH -> R.drawable.ic_car
+        BusinessCategory.CYBER_CAFE -> R.drawable.ic_code
+        BusinessCategory.SALON_BARBERSHOP, BusinessCategory.SECOND_HAND_CLOTHES -> R.drawable.ic_palette
+        BusinessCategory.HARDWARE, BusinessCategory.POSHO_MILL -> R.drawable.ic_settings
+        BusinessCategory.BODABODA_FLEET -> R.drawable.ic_run
+        BusinessCategory.EVENT_TENT_HIRE -> R.drawable.ic_event
+        BusinessCategory.WATER_VENDING, BusinessCategory.FISH_FARM -> R.drawable.ic_cloud
+        BusinessCategory.DAIRY_FARM, BusinessCategory.POULTRY_FARM,
+        BusinessCategory.HORTICULTURE, BusinessCategory.AGROVET,
+        BusinessCategory.GREEN_GROCERY -> R.drawable.ic_chama
+        else -> R.drawable.ic_business
     }
     
     enum class MainTab {

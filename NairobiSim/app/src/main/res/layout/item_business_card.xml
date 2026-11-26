@@ -15,23 +15,33 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/nairobi_surface"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/nairobi_divider"
+        app:strokeWidth="1dp"
+        android:clickable="true"
+        android:focusable="true"
         android:onClick="@{() -> viewModel.selectBusiness(business)}">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:gravity="center_vertical"
+            android:padding="14dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_business_placeholder"
-                android:background="@color/nairobi_green_light"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CornerSize8" />
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:padding="8dp"
+                android:src="@{viewModel.categoryIcon(business.category)}"
+                android:backgroundTint="@{viewModel.categoryColor(business.category)}"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CornerSize12"
+                tools:src="@drawable/ic_car"
+                tools:backgroundTint="@color/cat_matatu" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -44,44 +54,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{business.name}"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     tools:text="Matatu Sacco (CBD)" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="1dp"
                     android:text="@{business.category.displayName + &quot; • &quot; + business.location.displayName}"
                     android:textSize="12sp"
-                    android:textColor="@color/nairobi_grey"
+                    android:textColor="@color/nairobi_text_secondary"
                     tools:text="Transport • CBD" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="4dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{&quot;Level &quot; + business.level}"
-                            android:textSize="11sp"
-                            android:paddingHorizontal="6dp"
-                            android:paddingVertical="2dp"
-                            android:background="@drawable/bg_level_badge"
-                            android:textColor="@color/nairobi_white" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="@{business.isOperational ? &quot;Operational&quot; : &quot;Closed&quot;}"
-                            android:textSize="11sp"
-                            android:textColor="@{business.isOperational ? @color/income_green : @color/expense_red}" />
-
-                    </LinearLayout>
+                    android:layout_marginTop="4dp"
+                    android:text="@{&quot;Level &quot; + business.level + (business.isOperational ? &quot;  •  Operational&quot; : &quot;  •  Closed&quot;)}"
+                    android:textSize="11sp"
+                    android:textColor="@{business.isOperational ? @color/income_green : @color/expense_red}"
+                    tools:text="Level 1 • Operational" />
 
             </LinearLayout>
 
@@ -94,21 +90,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.formatKes(business.netMonthlyIncome)}"
-                    android:textSize="16sp"
+                    android:text="@{viewModel.formatHourly(business.hourlyProfit)}"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@{business.netMonthlyIncome >= 0 ? @color/income_green : @color/expense_red}"
-                    tools:text="KES 120,000" />
+                    tools:text="KES 167 /hr" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@{&quot;Profit: &quot; + viewModel.formatHourly(business.hourlyProfit)}"
+                    android:layout_marginTop="1dp"
+                    android:text="@{viewModel.formatKes(business.netMonthlyIncome) + &quot; /mo&quot;}"
                     android:textSize="11sp"
-                    android:textColor="@color/nairobi_grey" />
+                    android:textColor="@color/nairobi_text_secondary"
+                    tools:text="KES 120,000 /mo" />
 
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_arrow_right"
+                app:tint="@color/nairobi_text_disabled" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

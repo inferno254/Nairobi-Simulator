@@ -26,8 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
                 app:strokeColor="@color/nairobi_orange"
                 app:strokeWidth="1dp">
 
@@ -35,17 +35,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="12dp">
+                    android:padding="14dp">
 
                     <TextView
                         android:id="@+id/clockText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.clockText}"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/nairobi_orange"
-                        tools:text="Day 26/11/2026 • 1 day = 10 sec" />
+                        tools:text="Day 26/11/2026 14:30 • Normal" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
