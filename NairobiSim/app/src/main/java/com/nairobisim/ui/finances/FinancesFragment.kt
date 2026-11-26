@@ -56,9 +56,7 @@ class FinancesFragment : Fragment() {
             val expenses = listOf(
                 "Employee Salaries" to businesses.sumOf { it.employees.filter { it.isActive }.sumOf { it.salary } },
                 "Rent & Utilities" to businesses.sumOf { (it.capitalInvested * 0.02).toLong() },
-                "Asset Maintenance" to businesses.sumOf { it.assets.sumOf { it.maintenanceCost } },
-                "Loan Payments" to viewModel.playerProfile.value?.loans?.sumOf { it.monthlyPayment } ?: 0L,
-                "Chama Contributions" to viewModel.playerProfile.value?.chamas?.sumOf { it.monthlyContribution } ?: 0L
+                "Asset Maintenance" to businesses.sumOf { it.assets.sumOf { it.maintenanceCost } }
             )
             expenseAdapter.submitList(expenses)
         }
@@ -96,9 +94,6 @@ class IncomeAdapter : androidx.recyclerview.widget.ListAdapter<Business, IncomeA
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(business: Business) {
             binding.business = business
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
             binding.executePendingBindings()
         }
     }
@@ -127,9 +122,6 @@ class ExpenseAdapter : androidx.recyclerview.widget.ListAdapter<Pair<String, Lon
         fun bind(category: String, amount: Long) {
             binding.category = category
             binding.amount = amount
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
             binding.executePendingBindings()
         }
     }

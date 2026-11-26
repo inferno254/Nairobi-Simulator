@@ -50,8 +50,8 @@ class EventsFragment : Fragment() {
     }
     
     private fun observeData() {
-        viewModel.activeEvents.observe(viewLifecycleOwner) { events ->
-            activeEventAdapter.submitList(events.filter { it.isActive })
+        viewModel.currentEvents.observe(viewLifecycleOwner) { events ->
+            activeEventAdapter.submitList(events)
             historyEventAdapter.submitList(events.sortedByDescending { it.startDate })
             
             binding.viewModel = viewModel
@@ -86,9 +86,6 @@ class EventAdapter : androidx.recyclerview.widget.ListAdapter<MarketEvent, Event
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(event: MarketEvent) {
             binding.event = event
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
             binding.executePendingBindings()
         }
     }

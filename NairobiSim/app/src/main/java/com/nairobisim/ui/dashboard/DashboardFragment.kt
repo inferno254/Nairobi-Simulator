@@ -44,6 +44,7 @@ class DashboardFragment : Fragment() {
     }
     
     private fun setupRecyclerViews() {
+        businessAdapter.viewModel = viewModel
         binding.businessesRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = businessAdapter
@@ -61,6 +62,9 @@ class DashboardFragment : Fragment() {
     }
     
     private fun observeData() {
+        binding.viewModel = viewModel
+        binding.executePendingBindings()
+        
         viewModel.activeBusinesses.observe(viewLifecycleOwner) { businesses ->
             businessAdapter.submitList(businesses)
             binding.businessesRecyclerView.visibility = if (businesses.isEmpty()) View.GONE else View.VISIBLE
@@ -77,7 +81,7 @@ class DashboardFragment : Fragment() {
         
         viewModel.playerProfile.observe(viewLifecycleOwner) { profile ->
             profile?.let {
-                binding.kesBalance.text = viewModel.formatKes(it.kesBalance)
+                binding.kesBalance.text = viewModel.formatKes(it.kesBalance ?: 0L)
                 binding.monthlyIncome.text = viewModel.formatKes(calculateMonthlyIncome())
                 binding.monthlyExpenses.text = viewModel.formatKes(calculateMonthlyExpenses())
                 binding.netWorth.text = viewModel.formatKes(calculateNetWorth(it))
@@ -95,7 +99,7 @@ class DashboardFragment : Fragment() {
     
     private fun calculateNetWorth(profile: com.nairobisim.model.PlayerProfile): Long {
         val businessValue = viewModel.activeBusinesses.value?.sumOf { it.capitalInvested } ?: 0
-        return profile.kesBalance + profile.mpesaBalance + profile.bankBalance + profile.cryptoWallet + businessValue
+        return (profile.kesBalance ?: 0) + (profile.mpesaBalance ?: 0) + (profile.bankBalance ?: 0) + (profile.cryptoWallet ?: 0) + businessValue
     }
     
     private fun setupClickListeners() {
@@ -106,9 +110,9 @@ class DashboardFragment : Fragment() {
         
         businessAdapter.onItemClick = { business ->
             viewModel.selectBusiness(business)
-            findNavController().navigate(
-                DashboardFragmentDirections.actionDashboardFragmentToBusinessDetailFragment(business.id)
-            )
+            val bundle = Bundle()
+            bundle.putString("businessId", business.id)
+            findNavController().navigate(R.id.businessDetailFragment, bundle)
         }
     }
     

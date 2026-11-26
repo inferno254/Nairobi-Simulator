@@ -24,7 +24,6 @@ class TransactionAdapter : ListAdapter<DailyTransaction, TransactionAdapter.Tran
     inner class TransactionViewHolder(private val binding: ItemTransactionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(transaction: DailyTransaction) {
             binding.transaction = transaction
-            binding.viewModel = MainViewModel(requireContext().applicationContext as com.nairobisim.NairobiSimApplication)
             binding.executePendingBindings()
         }
     }

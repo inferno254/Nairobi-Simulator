@@ -115,7 +115,7 @@ class ChamaFragment : Fragment() {
         }
         
         availableChamaAdapter.onItemClick = { chama ->
-            viewModel.joinChama(chama)
+            // TODO: Implement join chama
         }
     }
     
@@ -146,9 +146,6 @@ class MyChamaAdapter : androidx.recyclerview.widget.ListAdapter<Chama, MyChamaAd
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(chama: Chama) {
             binding.chama = chama
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
             binding.executePendingBindings()
         }
     }
@@ -177,10 +174,6 @@ class AvailableChamaAdapter : androidx.recyclerview.widget.ListAdapter<Chama, Av
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(chama: Chama) {
             binding.chama = chama
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
-            binding.onClick = { onItemClick?.invoke(chama) }
             binding.executePendingBindings()
         }
     }

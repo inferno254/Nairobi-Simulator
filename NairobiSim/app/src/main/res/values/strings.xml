@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name">Nairobi Sim</string>
+    <string name="app_name">Nairobi Simulator: Surviving the City</string>
     <string name="tab_dashboard">Dashboard</string>
     <string name="tab_businesses">Businesses</string>
+    <string name="tab_forex">Forex</string>
+    <string name="tab_shares">Shares</string>
+    <string name="tab_cars">Cars</string>
+<string name="tab_npc">NPC Encounters</string>
+    <string name="tab_leaderboard">Leaderboard</string>
     <string name="tab_finances">Finances</string>
     <string name="tab_loans">Loans</string>
-    <string name="tab_chama">Chama</string>
-    <string name="tab_events">Events</string>
-    <string name="tab_settings">Settings</string>
+    <string name="tab_freelance">Freelance</string>
     <string name="game_speed">Game Speed</string>
     <string name="advance_day">Advance Day</string>
     <string name="settings">Settings</string>
@@ -34,8 +37,6 @@
     <string name="start_business_button">Start Business</string>
     <string name="upgrade_business">Upgrade Business</string>
     <string name="collect_revenue">Collect Revenue</string>
-    <string name="loan_amount">Loan Amount</string>
-    <string name="loan_term">Term (months)</string>
     <string name="interest_rate">Interest Rate (%/month)</string>
     <string name="apply_loan_button">Apply</string>
     <string name="repay_loan">Repay</string>
@@ -82,4 +83,66 @@
 
     <!-- Settings -->
     <string name="loan_term">Term (months)</string>
+    <string name="revenue_boost_format">Revenue Boost: %d%%</string>
+    <string name="durability_format">Durability: %d%%</string>
+    <string name="efficiency_format">Efficiency: %d%%</string>
+    <string name="severity_format">Severity: %d%%</string>
+    <string name="interest_format">Interest: %d%%</string>
+    <string name="apr_format">%d%% APR</string>
+    <string name="location_stats">Demand: %1$d%% | Rent: %2$d%% | Competition: %3$d%%</string>
+
+    <!-- Freelance -->
+    <string name="freelance_title">Freelance Hustle</string>
+    <string name="freelance_subtitle">Pick up gigs, build skills, get paid</string>
+    <string name="freelance_no_gigs">No gigs available right now. Check back later.</string>
+    <string name="freelance_haggle">Haggle</string>
+    <string name="freelance_complete">Complete Work</string>
+    <string name="freelance_collect">Collect Payment</string>
+    <string name="freelance_your_offer">Your offer (KES)</string>
+    <string name="freelance_client_pays">Client pays on time</string>
+    <string name="freelance_client_delays">Client may delay payment</string>
+    <string name="freelance_skill_required">Requires %1$s: %2$s</string>
+    <string name="freelance_skill_too_low">Skill too low</string>
+    <string name="freelance_payment_delayed">Payment delayed</string>
+    <string name="freelance_payment_received">Payment received</string>
+    <string name="freelance_total_earnings">Total Earnings</string>
+    <string name="freelance_gigs_completed">Gigs Completed</string>
+    <string name="freelance_reputation">Client Reputation</string>
+
+    <!-- Life Mentor -->
+    <string name="tab_life_mentor">Life Mentor</string>
+    <string name="life_mentor_title">Convince Someone</string>
+    <string name="life_mentor_subtitle">Listen to their story. Convince them to choose a better path.</string>
+    <string name="life_mentor_no_cases">No one needs your counsel right now. Come back later.</string>
+    <string name="life_mentor_find_new">Find New People</string>
+    <string name="life_mentor_people_at_crossroads">People at Crossroads</string>
+    <string name="life_mentor_suggest_path">Suggest a Path:</string>
+    <string name="life_mentor_karma">Karma</string>
+    <string name="life_mentor_wisdom">Wisdom</string>
+    <string name="life_mentor_people_counseled">People Counseled</string>
+
+    <!-- Betting -->
+    <string name="tab_betting">Betting</string>
+    <string name="betting_title">SportPesa • Betway • 1xBet</string>
+    <string name="betting_subtitle">Real odds from Kenyan bookmakers. Place bets, win money.</string>
+    <string name="betting_wallet">Betting Wallet</string>
+    <string name="betting_total_won">Total Won</string>
+    <string name="betting_add_money">Add KES 50K</string>
+    <string name="betting_simulate">Simulate Results</string>
+    <string name="betting_available">Available Matches (Real Odds)</string>
+    <string name="betting_my_bets">My Bets</string>
+
+    <!-- Ponzi Schemes -->
+    <string name="tab_ponzi">Ponzi Schemes</string>
+    <string name="ponzi_title">Get Rich Quick Schemes</string>
+    <string name="ponzi_subtitle">Invest in schemes promising high returns. But remember - if it sounds too good to be true, it probably is.</string>
+    <string name="ponzi_total_invested">Total Invested</string>
+    <string name="ponzi_lost_money">Lost Money</string>
+    <string name="ponzi_schemes">Investment Schemes</string>
+    <string name="ponzi_my_investments">My Investments</string>
+
+    <!-- Banking -->
+    <string name="tab_banking">Banking &amp; M-Pesa</string>
+    <string name="banking_title">Mobile Money &amp; Banks</string>
+    <string name="banking_subtitle">M-Pesa, Airtel Money, KCB, Equity, Co-op, CBK - real Kenyan banking simulation</string>
 </resources>

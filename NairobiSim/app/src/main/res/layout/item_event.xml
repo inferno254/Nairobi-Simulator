@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -16,9 +17,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="@{event.isActive ? 4f : 1f}"
-        app:strokeColor="@{event.isActive ? @color/nairobi_orange : @color/transparent}"
-        app:strokeWidth="@{event.isActive ? 2f : 0f}">
+        app:cardElevation="4dp"
+        app:strokeColor="@color/nairobi_orange"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,14 +32,14 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="12dp"
                 app:cardCornerRadius="12dp"
-                app:cardBackgroundColor="@{event.isActive ? @color/nairobi_orange_light : @color/nairobi_grey_light}">
+                app:cardBackgroundColor="@color/nairobi_orange_light">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_event"
-                    android:tint="@{event.isActive ? @color/nairobi_orange : @color/nairobi_grey}" />
+                    android:tint="@color/nairobi_orange" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -57,7 +58,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{event.name}"
+                        android:text="@{event.title}"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         tools:text="Fuel Price Surge" />
@@ -67,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{event.type.name}"
                         android:textSize="10sp"
-                        app:chipBackgroundColor="@{event.isActive ? @color/nairobi_orange : @color/nairobi_grey}"
+                        app:chipBackgroundColor="@color/nairobi_orange"
                         android:textColor="@color/nairobi_white"
                         tools:text="Cost Spike" />
 
@@ -91,7 +92,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{\"Duration: \" + event.durationDays + \" days\"}"
+                            android:text="Duration: 30 days"
                             android:textSize="11sp"
                             android:textColor="@color/nairobi_grey"
                             tools:text="Duration: 30 days" />
@@ -100,19 +101,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="@{\"Severity: \" + (event.severity * 100).toInt() + \"%\"}"
+                            android:text="Severity: 75%"
                             android:textSize="11sp"
-                            android:textColor="@{event.severity > 0.5 ? @color/expense_red : @color/nairobi_orange}"
+                            android:textColor="@color/nairobi_orange"
                             tools:text="Severity: 75%" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="@{event.isActive ? \"ACTIVE\" : \"ENDED\"}"
+                            android:text="ACTIVE"
                             android:textSize="11sp"
                             android:textStyle="bold"
-                            android:textColor="@{event.isActive ? @color/nairobi_orange : @color/nairobi_green}"
+                            android:textColor="@color/nairobi_orange"
                             tools:text="ACTIVE" />
 
                     </LinearLayout>
@@ -128,10 +129,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.formatImpact(event.impact)}"
+                    android:text="KES 0"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@{event.impact >= 0 ? @color/income_green : @color/expense_red}"
+                    android:textColor="@color/income_green"
                     tools:text="-KES 50,000" />
 
                 <TextView

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -73,7 +74,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{\"Capital: \" + viewModel.formatKes(category.baseCapital)}"
+                            android:text="@{&quot;Capital: &quot; + viewModel.formatKes(category.baseCapital)}"
                             android:textSize="12sp"
                             android:textColor="@color/nairobi_green"
                             tools:text="Capital: KES 500,000" />
@@ -82,7 +83,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="@{\"Est. Monthly: \" + viewModel.formatKes(category.baseCapital / 5)}"
+                            android:text="@{&quot;Est. Monthly: &quot; + viewModel.formatKes(category.baseCapital / 5)}"
                             android:textSize="12sp"
                             android:textColor="@color/income_green"
                             tools:text="Est. Monthly: KES 100,000" />
@@ -95,8 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Start"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:onClick="@{() -> viewModel.startBusiness(category, com.nairobisim.model.NairobiArea.CBD)}" />
+                style="@style/Widget.Material3.Button.TextButton" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

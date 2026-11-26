@@ -12,28 +12,18 @@
         android:title="@string/tab_businesses" />
 
     <item
-        android:id="@+id/nav_finances"
-        android:icon="@drawable/ic_finance"
-        android:title="@string/tab_finances" />
+        android:id="@+id/nav_forex"
+        android:icon="@drawable/ic_swap"
+        android:title="@string/tab_forex" />
 
     <item
-        android:id="@+id/nav_loans"
-        android:icon="@drawable/ic_loan"
-        android:title="@string/tab_loans" />
+        android:id="@+id/nav_leaderboard"
+        android:icon="@drawable/ic_trophy"
+        android:title="@string/tab_leaderboard" />
 
     <item
-        android:id="@+id/nav_chama"
-        android:icon="@drawable/ic_chama"
-        android:title="@string/tab_chama" />
-
-    <item
-        android:id="@+id/nav_events"
-        android:icon="@drawable/ic_events"
-        android:title="@string/tab_events" />
-
-    <item
-        android:id="@+id/nav_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/tab_settings" />
+        android:id="@+id/nav_bribery"
+        android:icon="@drawable/ic_handcuffs"
+        android:title="@string/tab_npc" />
 
 </menu>

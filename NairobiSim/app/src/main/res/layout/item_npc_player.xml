@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/nairobi_card"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtNpcName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mzee Jengo"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_text_primary" />
+
+            <TextView
+                android:id="@+id/txtNpcType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CPU"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/txtNpcLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City Centre"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/txtNpcWealth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KES 7.5M"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_primary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btnSendToNpc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SEND"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/nairobi_primary"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp"
+                style="@style/Widget.NairobiSim.Button.Primary" />
+
+            <Button
+                android:id="@+id/btnNpcSend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="REQUEST"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/nairobi_secondary"
+                android:textColor="@android:color/white"
+                style="@style/Widget.NairobiSim.Button.Primary" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

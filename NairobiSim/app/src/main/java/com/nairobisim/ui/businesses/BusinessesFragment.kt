@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nairobisim.R
 import com.nairobisim.databinding.FragmentBusinessesBinding
@@ -66,9 +67,9 @@ class BusinessesFragment : Fragment() {
         
         activeAdapter.onItemClick = { business ->
             viewModel.selectBusiness(business)
-            findNavController().navigate(
-                BusinessesFragmentDirections.actionBusinessesFragmentToBusinessDetailFragment(business.id)
-            )
+            val bundle = Bundle()
+            bundle.putString("businessId", business.id)
+            findNavController().navigate(R.id.businessDetailFragment, bundle)
         }
     }
     

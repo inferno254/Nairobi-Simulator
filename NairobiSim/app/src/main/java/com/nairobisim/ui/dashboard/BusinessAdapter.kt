@@ -10,25 +10,26 @@ import com.nairobisim.model.Business
 import com.nairobisim.ui.main.MainViewModel
 
 class BusinessAdapter : ListAdapter<Business, BusinessAdapter.BusinessViewHolder>(BusinessDiffCallback()) {
-    
+
     var onItemClick: ((Business) -> Unit)? = null
-    
+    var viewModel: MainViewModel? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessViewHolder {
         val binding = ItemBusinessCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BusinessViewHolder(binding)
     }
-    
+
     override fun onBindViewHolder(holder: BusinessViewHolder, position: Int) {
         val business = getItem(position)
         holder.bind(business)
     }
-    
+
     inner class BusinessViewHolder(private val binding: ItemBusinessCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(business: Business) {
             binding.business = business
-            binding.viewModel = MainViewModel(requireContext().applicationContext as com.nairobisim.NairobiSimApplication)
+            binding.viewModel = viewModel
             binding.executePendingBindings()
-            
+
             itemView.setOnClickListener { onItemClick?.invoke(business) }
         }
     }

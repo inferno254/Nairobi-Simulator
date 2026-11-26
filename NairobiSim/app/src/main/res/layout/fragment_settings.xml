@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas/android/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -83,8 +83,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:checked="@{viewModel.settings.autoCollectRevenue}"
-                                    android:onCheckedChanged="@{(view, checked) -> viewModel.updateSetting('autoCollectRevenue', checked)}" />
+                                    android:checked="false" />
 
                         </LinearLayout>
 
@@ -120,8 +119,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:checked="@{viewModel.settings.autoPayExpenses}"
-                                    android:onCheckedChanged="@{(view, checked) -> viewModel.updateSetting('autoPayExpenses', checked)}" />
+                                    android:checked="false" />
 
                         </LinearLayout>
 
@@ -157,8 +155,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:checked="@{viewModel.settings.eventNotifications}"
-                                    android:onCheckedChanged="@{(view, checked) -> viewModel.updateSetting('eventNotifications', checked)}" />
+                                    android:checked="false" />
 
                         </LinearLayout>
 
@@ -193,8 +190,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:checked="@{viewModel.settings.soundEffects}"
-                                    android:onCheckedChanged="@{(view, checked) -> viewModel.updateSetting('soundEffects', checked)}" />
+                                    android:checked="false" />
 
                         </LinearLayout>
 
@@ -255,8 +251,44 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     style="@style/Widget.Material3.Button.OutlinedButton"
-                                    android:text="@{viewModel.settings.theme}"
-                                    android:onClick="@{() -> viewModel.cycleTheme()}" />
+                                    android:text="Theme" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="12dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Dark Mode"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:text="Switch between light and dark theme"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/nairobi_grey" />
+
+                                </LinearLayout>
+
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    android:id="@+id/darkModeSwitch"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:checked="false" />
 
                         </LinearLayout>
 
@@ -291,8 +323,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     style="@style/Widget.Material3.Button.OutlinedButton"
-                                    android:text="@{viewModel.settings.currencyFormat}"
-                                    android:onClick="@{() -> viewModel.cycleCurrencyFormat()}" />
+                                    android:text="KES" />
 
                         </LinearLayout>
 
@@ -327,8 +358,7 @@
                             android:layout_marginBottom="8dp"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:text="Export Game Data"
-                            android:icon="@drawable/ic_download"
-                            android:onClick="@{() -> viewModel.exportGameData()}" />
+                            android:icon="@drawable/ic_download" />
 
                         <com.google.android.material.button.MaterialButton
                             android:layout_width="match_parent"
@@ -336,8 +366,7 @@
                             android:layout_marginBottom="8dp"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:text="Import Game Data"
-                            android:icon="@drawable/ic_upload"
-                            android:onClick="@{() -> viewModel.importGameData()}" />
+                            android:icon="@drawable/ic_upload" />
 
                         <com.google.android.material.button.MaterialButton
                             android:layout_width="match_parent"
@@ -345,7 +374,6 @@
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:text="Reset Game"
                             android:icon="@drawable/ic_refresh"
-                            android:onClick="@{() -> viewModel.showResetConfirmation()}"
                             android:iconTint="@color/expense_red"
                             android:backgroundTint="@color/expense_red_light" />
 

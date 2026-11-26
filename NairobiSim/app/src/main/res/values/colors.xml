@@ -1,4 +1,56 @@
 <resources>
+    <!-- Nairobi-inspired vibrant primary palette -->
+    <color name="nairobi_primary">#1A8A3A</color>
+    <color name="nairobi_accent">#FB8C00</color>
+    <color name="nairobi_primary_dark">#0D5A23</color>
+    <color name="nairobi_primary_light">#E8F5E9</color>
+    <color name="nairobi_primary_container">#C8E6C9</color>
+    <color name="nairobi_on_primary">#FFFFFF</color>
+
+    <!-- Secondary: Matatu-inspired vibrant orange -->
+    <color name="nairobi_secondary">#FB8C00</color>
+    <color name="nairobi_secondary_dark">#E65100</color>
+    <color name="nairobi_secondary_light">#FFF3E0</color>
+    <color name="nairobi_secondary_container">#FFE0B2</color>
+    <color name="nairobi_on_secondary">#000000</color>
+
+    <!-- Tertiary: Kenyan flag red -->
+    <color name="nairobi_tertiary">#D32F2F</color>
+    <color name="nairobi_tertiary_light">#FFEBEE</color>
+    <color name="nairobi_on_tertiary">#FFFFFF</color>
+
+    <!-- Background & Surface -->
+    <color name="nairobi_bg">#FAFAF7</color>
+    <color name="nairobi_bg_alt">#F0F0EC</color>
+    <color name="nairobi_surface">#FFFFFF</color>
+    <color name="nairobi_surface_light">#F8F8F5</color>
+    <color name="nairobi_card">#FFFFFF</color>
+    <color name="nairobi_card_elevated">#FFFFFF</color>
+
+    <!-- Text - high contrast -->
+    <color name="nairobi_text_primary">#212121</color>
+    <color name="nairobi_text_secondary">#616161</color>
+    <color name="nairobi_text_disabled">#9E9E9E</color>
+    <color name="nairobi_text_on_primary">#FFFFFF</color>
+    <color name="nairobi_text_on_surface">#212121</color>
+
+    <!-- Dividers & Borders -->
+    <color name="nairobi_divider">#E0E0E0</color>
+    <color name="nairobi_border">#BDBDBD</color>
+    <color name="nairobi_input_bg">#FAFAFA</color>
+
+    <!-- Status colors -->
+    <color name="nairobi_success">#2E7D32</color>
+    <color name="nairobi_success_light">#E8F5E9</color>
+    <color name="nairobi_error">#C62828</color>
+    <color name="nairobi_on_error">#FFFFFF</color>
+    <color name="nairobi_error_light">#FFEBEE</color>
+    <color name="nairobi_warning">#F9A825</color>
+    <color name="nairobi_warning_light">#FFFDE7</color>
+    <color name="nairobi_info">#1565C0</color>
+    <color name="nairobi_info_light">#E3F2FD</color>
+
+    <!-- Legacy color names (kept for compatibility) -->
     <color name="nairobi_green">#2E7D32</color>
     <color name="nairobi_green_light">#4CAF50</color>
     <color name="nairobi_green_dark">#1B5E20</color>
@@ -15,7 +67,7 @@
     <color name="nairobi_grey_light">#E0E0E0</color>
     <color name="nairobi_white">#FFFFFF</color>
     <color name="nairobi_black">#212121</color>
-    <color name="bottom_nav_active">#2E7D32</color>
+    <color name="bottom_nav_active">#1A8A3A</color>
     <color name="bottom_nav_inactive">#757575</color>
     <color name="income_green">#2E7D32</color>
     <color name="expense_red">#C62828</color>
@@ -25,4 +77,19 @@
     <color name="mpesa_green">#00A651</color>
     <color name="bank_blue">#003DA5</color>
     <color name="transparent">#00000000</color>
+
+    <!-- Semantic colors for UI -->
+    <color name="color_surface_variant">#ECECEC</color>
+    <color name="color_on_surface_variant">#494949</color>
+    <color name="color_outline">#BDBDBD</color>
+    <color name="color_on_surface">#212121</color>
+    <color name="color_on_background">#212121</color>
+    <color name="color_primary_container">#DCEDC8</color>
+    <color name="color_on_primary_container">#1B5E20</color>
+    <color name="color_secondary_container">#FFE0B2</color>
+    <color name="color_on_secondary_container">#4A2C00</color>
+    <color name="color_tertiary_container">#FFAB91</color>
+    <color name="color_on_tertiary_container">#740000</color>
+    <color name="color_error_container">#F9DCDC</color>
+    <color name="color_on_error_container">#690005</color>
 </resources>

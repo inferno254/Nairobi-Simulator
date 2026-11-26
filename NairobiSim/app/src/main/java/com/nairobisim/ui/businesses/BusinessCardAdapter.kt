@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nairobisim.databinding.ItemBusinessCardBinding
 import com.nairobisim.model.Business
+import com.nairobisim.model.BusinessCategory
 import com.nairobisim.ui.main.MainViewModel
 
 class BusinessCardAdapter : ListAdapter<Business, BusinessCardAdapter.BusinessViewHolder>(BusinessDiffCallback()) {
@@ -26,7 +27,6 @@ class BusinessCardAdapter : ListAdapter<Business, BusinessCardAdapter.BusinessVi
     inner class BusinessViewHolder(private val binding: ItemBusinessCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(business: Business) {
             binding.business = business
-            binding.viewModel = MainViewModel(requireContext().applicationContext as com.nairobisim.NairobiSimApplication)
             binding.executePendingBindings()
             
             itemView.setOnClickListener { onItemClick?.invoke(business) }
@@ -59,7 +59,6 @@ class BusinessCategoryAdapter : ListAdapter<BusinessCategory, BusinessCategoryAd
     inner class CategoryViewHolder(private val binding: com.nairobisim.databinding.ItemBusinessCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(category: BusinessCategory) {
             binding.category = category
-            binding.viewModel = MainViewModel(requireContext().applicationContext as com.nairobisim.NairobiSimApplication)
             binding.executePendingBindings()
         }
     }

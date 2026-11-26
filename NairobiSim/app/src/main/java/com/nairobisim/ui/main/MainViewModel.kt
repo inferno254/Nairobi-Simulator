@@ -32,6 +32,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val _selectedTab = MutableLiveData<MainTab>(MainTab.DASHBOARD)
     val selectedTab: LiveData<MainTab> = _selectedTab
     
+    val _isOnboardingComplete = MutableLiveData<Boolean>(false)
+    val isOnboardingComplete: LiveData<Boolean> = _isOnboardingComplete
+    
     val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> = _toastMessage
     
@@ -44,11 +47,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             repository.initializeSimulationState()
             repository.initializeMarketEvents()
             
-            // Create default player if not exists
+            // Check onboarding status
             val profile = repository.getPlayerProfile()
+            _isOnboardingComplete.postValue(profile?.isProfileComplete ?: false)
+            
+            // Create default player if not exists
             if (profile == null) {
-                val newProfile = PlayerProfile()
+                val newProfile = PlayerProfile(unlockRequirements = UnlockRequirements())
                 repository.initializePlayer(newProfile)
+                _isOnboardingComplete.postValue(false)
             }
         }
     }
@@ -57,26 +64,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun startBusiness(category: BusinessCategory, location: NairobiArea, name: String? = null) {
         viewModelScope.launch {
             val profile = repository.getPlayerProfile() ?: return@launch
-            val unlockReq = category.unlockRequirements
             
-            if (profile.level < unlockReq.minLevel) {
-                _toastMessage.postValue("Need level ${unlockReq.minLevel} to start ${category.displayName}")
+            if (profile.level < 1) {
+                _toastMessage.postValue("Need level 1 to start ${category.displayName}")
                 return@launch
             }
             
-            if (profile.kesBalance < category.baseCapital) {
+            if ((profile.kesBalance ?: 0L) < category.baseCapital) {
                 _toastMessage.postValue("Insufficient funds. Need KES ${category.baseCapital}")
                 return@launch
             }
             
-            val businessId = "biz_${category.name.toLowerCase()}_${System.currentTimeMillis()}"
+            val businessId = "biz_${category.name.lowercase()}_${System.currentTimeMillis()}"
             val business = Business(
                 id = businessId,
                 name = name ?: "${category.displayName} (${location.displayName})",
                 category = category,
                 location = location,
                 capitalInvested = category.baseCapital,
-                unlockRequirements = unlockReq
+                unlockRequirements = UnlockRequirements()
             )
             
             business.monthlyRevenue = business.calculateRevenue()
@@ -108,6 +114,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             NairobiArea.RONGAI -> 35000
             NairobiArea.KIKUYU -> 25000
             NairobiArea.LIMURU -> 20000
+            NairobiArea.EASTLEIGH -> 40000
+            NairobiArea.KAYOLE -> 25000
+            NairobiArea.KILIMANI -> 80000
+            NairobiArea.KIAMBU -> 30000
             NairobiArea.ONLINE -> 5000
         }
         
@@ -145,7 +155,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val upgradeCost = business.category.baseCapital / 2 * business.level
             val profile = repository.getPlayerProfile() ?: return@launch
             
-            if (profile.kesBalance < upgradeCost) {
+            if ((profile.kesBalance ?: 0L) < upgradeCost) {
                 _toastMessage.postValue("Need KES $upgradeCost to upgrade to level ${business.level + 1}")
                 return@launch
             }
@@ -183,7 +193,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun repayLoan(loan: Loan) {
         viewModelScope.launch {
             val profile = repository.getPlayerProfile() ?: return@launch
-            if (profile.kesBalance < loan.monthlyPayment) {
+            if ((profile.kesBalance ?: 0L) < loan.monthlyPayment) {
                 _toastMessage.postValue("Insufficient funds for repayment (KES ${loan.monthlyPayment})")
                 return@launch
             }
@@ -228,6 +238,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     
     enum class MainTab {
-        DASHBOARD, BUSINESSES, FINANCES, LOANS, CHAMA, EVENTS, SETTINGS
+        DASHBOARD, BUSINESSES, FOREX, LEADERBOARD, NPC_ENCOUNTER, SHARP_BOYS
     }
 }

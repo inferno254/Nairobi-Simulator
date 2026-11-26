@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.nairobisim.ui.onboarding.OnboardingFragment"
+        android:label="Onboarding"
+        tools:layout="@layout/fragment_onboarding" />
+
+    <fragment
         android:id="@+id/businessesFragment"
         android:name="com.nairobisim.ui.businesses.BusinessesFragment"
         android:label="@string/tab_businesses"
@@ -32,19 +38,85 @@
     <fragment
         android:id="@+id/chamaFragment"
         android:name="com.nairobisim.ui.chama.ChamaFragment"
-        android:label="@string/tab_chama"
+        android:label="Chama"
         tools:layout="@layout/fragment_chama" />
+
+    <fragment
+        android:id="@+id/forexFragment"
+        android:name="com.nairobisim.ui.forex.ForexFragment"
+        android:label="@string/tab_forex"
+        tools:layout="@layout/fragment_forex" />
+
+    <fragment
+        android:id="@+id/sharesFragment"
+        android:name="com.nairobisim.ui.shares.ShareFragment"
+        android:label="@string/tab_shares"
+        tools:layout="@layout/fragment_shares" />
+
+    <fragment
+        android:id="@+id/carsFragment"
+        android:name="com.nairobisim.ui.cars.CarsFragment"
+        android:label="@string/tab_cars"
+        tools:layout="@layout/fragment_cars" />
+
+    <fragment
+        android:id="@+id/briberyFragment"
+        android:name="com.nairobisim.ui.npc.NPCEncounterFragment"
+        android:label="@string/tab_npc"
+        tools:layout="@layout/fragment_npc_encounter" />
+
+    <fragment
+        android:id="@+id/sharpBoysFragment"
+        android:name="com.nairobisim.ui.sharpboys.SharpBoysFragment"
+        android:label="Sharp Boys"
+        tools:layout="@layout/fragment_sharp_boys" />
+
+    <fragment
+        android:id="@+id/freelanceFragment"
+        android:name="com.nairobisim.ui.freelance.FreelanceFragment"
+        android:label="@string/tab_freelance"
+        tools:layout="@layout/fragment_freelance" />
+
+    <fragment
+        android:id="@+id/lifeMentorFragment"
+        android:name="com.nairobisim.ui.lifementor.LifeMentorFragment"
+        android:label="@string/tab_life_mentor"
+        tools:layout="@layout/fragment_life_mentor" />
+
+    <fragment
+        android:id="@+id/bettingFragment"
+        android:name="com.nairobisim.ui.betting.BettingFragment"
+        android:label="@string/tab_betting"
+        tools:layout="@layout/fragment_betting" />
+
+    <fragment
+        android:id="@+id/ponziFragment"
+        android:name="com.nairobisim.ui.ponzi.PonziFragment"
+        android:label="@string/tab_ponzi"
+        tools:layout="@layout/fragment_ponzi" />
+
+    <fragment
+        android:id="@+id/bankingFragment"
+        android:name="com.nairobisim.ui.banking.BankingFragment"
+        android:label="@string/tab_banking"
+        tools:layout="@layout/fragment_banking" />
+
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.nairobisim.ui.leaderboard.LeaderboardFragment"
+        android:label="@string/tab_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
 
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.nairobisim.ui.events.EventsFragment"
-        android:label="@string/tab_events"
+        android:label="Events"
         tools:layout="@layout/fragment_events" />
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.nairobisim.ui.settings.SettingsFragment"
-        android:label="@string/tab_settings"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment

@@ -1,0 +1,25 @@
+# Gradle
+.gradle/
+build/
+**/build/
+!src/**/build/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+local.properties
+.cxx/
+.kotlin/
+
+# Firebase / secrets
+google-services.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# APK extracted (reverse engineering artifacts, large)
+apk_extracted/

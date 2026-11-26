@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/nairobi_card"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtBetMatch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Match"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_text_primary" />
+
+            <TextView
+                android:id="@+id/txtBetStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_warning" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/txtBetType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Match Winner"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/txtBetSelection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HOME"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/txtBetStake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KES 500"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Potential Win:"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/txtPotentialWin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KES 1050"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_primary" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSettle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Settle Bet (Simulate Result)"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/nairobi_secondary"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.NairobiSim.Button.Primary" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{viewModel.playerProfile.kesBalance != null ? @string/kes_balance + \" \" + viewModel.formatKes(viewModel.playerProfile.kesBalance) : \"KES 0\"}"
+                        android:text="@{viewModel.playerProfile.kesBalance != null ? @string/kes_balance + &quot; &quot; + viewModel.formatKes(viewModel.playerProfile.kesBalance) : &quot;KES 0&quot;}"
                         android:textSize="32sp"
                         android:textStyle="bold"
                         android:textColor="@color/nairobi_green"
@@ -90,7 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="@{viewModel.playerProfile.mpesaBalance != null ? viewModel.formatKes(viewModel.playerProfile.mpesaBalance) : \"KES 0\"}"
+                            android:text="@{viewModel.playerProfile.mpesaBalance != null ? viewModel.formatKes(viewModel.playerProfile.mpesaBalance) : &quot;KES 0&quot;}"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="@color/mpesa_green" />
@@ -123,7 +123,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="@{viewModel.playerProfile.bankBalance != null ? viewModel.formatKes(viewModel.playerProfile.bankBalance) : \"KES 0\"}"
+                                android:text="@{viewModel.playerProfile.bankBalance != null ? viewModel.formatKes(viewModel.playerProfile.bankBalance) : &quot;KES 0&quot;}"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/bank_blue" />
@@ -294,7 +294,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{@string/level + \" \" + viewModel.playerProfile.level}"
+                                android:text="@{@string/level + &quot; &quot; + viewModel.playerProfile.level}"
                                 android:textSize="14sp"
                                 android:textColor="@color/nairobi_green"
                                 tools:text="Level 1" />
@@ -303,7 +303,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
-                                android:text="@{@string/reputation + \" \" + viewModel.playerProfile.reputation}"
+                                android:text="@{@string/reputation + &quot; &quot; + viewModel.playerProfile.reputation}"
                                 android:textSize="14sp"
                                 android:textColor="@color/nairobi_orange"
                                 tools:text="Reputation 0" />

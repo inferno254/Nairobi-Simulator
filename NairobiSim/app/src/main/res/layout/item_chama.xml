@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -66,7 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="@{\"Members: \" + chama.members.size + \" | Cycle: \" + chama.cycleDuration + \" months\"}"
+                            android:text="@{&quot;Members: &quot; + chama.members.size + &quot; | Cycle: &quot; + chama.cycleDuration + &quot; months&quot;}"
                             android:textSize="12sp"
                             android:textColor="@color/nairobi_grey"
                             tools:text="Members: 15 | Cycle: 12 months" />
@@ -109,7 +110,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{\"Monthly: \" + viewModel.formatKes(chama.monthlyContribution)}"
+                        android:text="@{&quot;Monthly: &quot; + viewModel.formatKes(chama.monthlyContribution)}"
                         android:textSize="13sp"
                         android:textColor="@color/expense_red"
                         tools:text="Monthly: KES 15,000" />
@@ -118,7 +119,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{\"My Share: \" + viewModel.formatKes(chama.memberShares[chama.members.firstOrNull()?.id ?: \"\"] ?: 0L)}"
+                        android:text="@{&quot;My Share: &quot; + viewModel.formatKes(0L)}"
                         android:textSize="13sp"
                         android:textColor="@color/nairobi_blue"
                         android:gravity="center"
@@ -128,7 +129,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{\"Next Payout: \" + chama.nextPayoutDate}"
+                        android:text="@{&quot;Next Payout: &quot; + chama.nextPayoutDate}"
                         android:textSize="13sp"
                         android:textColor="@color/nairobi_grey"
                         android:gravity="end"
@@ -140,8 +141,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="6dp"
                     android:layout_marginTop="12dp"
-                    style="@style/Widget.Material3.ProgressBar.Horizontal"
-                    android:progress="@{(100 * chama.currentCycle / chama.cycleDuration).toInt()}"
+                    style="@style/Widget.NairobiSim.ProgressBar.Horizontal"
+                    android:progress="@{100 * chama.currentCycle / chama.cycleDuration}"
                     android:progressTint="@color/nairobi_green"
                     android:progressBackgroundTint="@color/nairobi_grey_light"
                     tools:progress="40" />

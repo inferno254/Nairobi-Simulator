@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/nairobi_card"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtLeague"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="League"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary" />
+
+            <TextView
+                android:id="@+id/txtBookmaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SportPesa"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_secondary"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtMatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Home vs Away"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/nairobi_text_primary"
+            android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/bg_stat_card"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HOME"
+                    android:textSize="11sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <TextView
+                    android:id="@+id/txtHomeOdds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2.10"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_primary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/bg_stat_card"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DRAW"
+                    android:textSize="11sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <TextView
+                    android:id="@+id/txtDrawOdds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3.20"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_secondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/bg_stat_card"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AWAY"
+                    android:textSize="11sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <TextView
+                    android:id="@+id/txtAwayOdds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3.40"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_tertiary" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/txtOverUnder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="O/U: 1.85 / 1.95"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary" />
+
+            <TextView
+                android:id="@+id/txtBtts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="BTTS: 1.75 / 2.05"
+                android:textSize="12sp"
+                android:textColor="@color/nairobi_text_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <EditText
+                android:id="@+id/edtStake"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Stake (KES)"
+                android:inputType="number"
+                android:textSize="14sp"
+                android:background="@drawable/bg_stat_card"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/btnBetHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BET HOME"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/nairobi_primary"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp"
+                style="@style/Widget.NairobiSim.Button.Primary" />
+
+            <Button
+                android:id="@+id/btnBetDraw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BET DRAW"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/nairobi_secondary"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp"
+                style="@style/Widget.NairobiSim.Button.Primary" />
+
+            <Button
+                android:id="@+id/btnBetAway"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BET AWAY"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/nairobi_tertiary"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp"
+                style="@style/Widget.NairobiSim.Button.Primary" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

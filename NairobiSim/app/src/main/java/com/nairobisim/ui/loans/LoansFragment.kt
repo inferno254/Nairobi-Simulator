@@ -55,9 +55,6 @@ class LoansFragment : Fragment() {
     
     private fun observeData() {
         viewModel.playerProfile.observe(viewLifecycleOwner) { profile ->
-            profile?.loans?.let { loans ->
-                activeLoanAdapter.submitList(loans.filter { it.isActive })
-            }
             binding.viewModel = viewModel
             binding.executePendingBindings()
         }
@@ -69,7 +66,6 @@ class LoansFragment : Fragment() {
         }
         
         availableLoanAdapter.onItemClick = { loanType ->
-            viewModel.selectLoanType(loanType)
             findNavController().navigate(R.id.loanApplicationFragment)
         }
     }
@@ -101,9 +97,6 @@ class ActiveLoanAdapter : androidx.recyclerview.widget.ListAdapter<Loan, ActiveL
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(loan: Loan) {
             binding.loan = loan
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
             binding.executePendingBindings()
         }
     }
@@ -132,10 +125,6 @@ class AvailableLoanAdapter : androidx.recyclerview.widget.ListAdapter<LoanType, 
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(loanType: LoanType) {
             binding.loanType = loanType
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
-            binding.onClick = { onItemClick?.invoke(loanType) }
             binding.executePendingBindings()
         }
     }

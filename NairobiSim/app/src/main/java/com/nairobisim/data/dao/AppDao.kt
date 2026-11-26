@@ -1,8 +1,10 @@
 package com.nairobisim.data.dao
 
 import androidx.room.*
+import com.nairobisim.data.converters.Converters
 import com.nairobisim.model.*
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 @Dao
 interface PlayerProfileDao {
@@ -56,6 +58,7 @@ interface BusinessDao {
 }
 
 @Dao
+@TypeConverters(Converters::class)
 interface TransactionDao {
     @Query("SELECT * FROM daily_transaction ORDER BY date DESC LIMIT :limit")
     fun getRecentTransactions(limit: Int): Flow<List<DailyTransaction>>
@@ -128,6 +131,7 @@ interface EmployeeDao {
 }
 
 @Dao
+@TypeConverters(Converters::class)
 interface MarketEventDao {
     @Query("SELECT * FROM market_event WHERE startDate <= :date AND endDate >= :date")
     fun getActiveEvents(date: Date): Flow<List<MarketEvent>>
@@ -155,4 +159,338 @@ interface SimulationStateDao {
     
     @Update
     suspend fun updateState(state: SimulationState)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface ForexTradeDao {
+    @Query("SELECT * FROM forex_trade WHERE symbol = :symbol ORDER BY openTime DESC")
+    fun getTradesBySymbol(symbol: String): Flow<List<ForexTrade>>
+    
+    @Query("SELECT * FROM forex_trade WHERE isClosed = 0 ORDER BY openTime DESC")
+    fun getOpenTrades(): Flow<List<ForexTrade>>
+    
+    @Query("SELECT * FROM forex_trade ORDER BY openTime DESC LIMIT :limit")
+    fun getRecentTrades(limit: Int): Flow<List<ForexTrade>>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTrade(trade: ForexTrade)
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTrades(trades: List<ForexTrade>)
+    
+    @Update
+    suspend fun updateTrade(trade: ForexTrade)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface ShareTradeDao {
+    @Query("SELECT * FROM share_trade WHERE symbol = :symbol ORDER BY timestamp DESC")
+    fun getTradesBySymbol(symbol: String): Flow<List<ShareTrade>>
+    
+    @Query("SELECT * FROM share_trade ORDER BY timestamp DESC LIMIT :limit")
+    fun getRecentTrades(limit: Int): Flow<List<ShareTrade>>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTrade(trade: ShareTrade)
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTrades(trades: List<ShareTrade>)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface SharpBoyEncounterDao {
+    @Query("SELECT * FROM sharp_boy_encounter ORDER BY timestamp DESC")
+    fun getAllEncounters(): Flow<List<SharpBoyEncounter>>
+    
+    @Query("SELECT * FROM sharp_boy_encounter WHERE isResolved = 0 ORDER BY timestamp DESC")
+    fun getUnresolvedEncounters(): Flow<List<SharpBoyEncounter>>
+    
+    @Query("SELECT * FROM sharp_boy_encounter WHERE id = :id")
+    suspend fun getEncounter(id: String): SharpBoyEncounter?
+    
+    @Query("SELECT COUNT(*) FROM sharp_boy_encounter")
+    suspend fun getCount(): Int
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertEncounter(encounter: SharpBoyEncounter)
+    
+    @Update
+    suspend fun updateEncounter(encounter: SharpBoyEncounter)
+}
+
+@Dao
+interface UserProfileDao {
+    @Query("SELECT * FROM user_profile WHERE playerId = :playerId")
+    suspend fun getUserProfile(playerId: String): UserProfile?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUserProfile(profile: UserProfile)
+    
+    @Update
+    suspend fun updateUserProfile(profile: UserProfile)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface FreelanceContractDao {
+    @Query("SELECT * FROM freelance_contract ORDER BY startedAt DESC")
+    fun getAllContracts(): Flow<List<FreelanceContract>>
+    
+    @Query("SELECT * FROM freelance_contract WHERE status != 'PAID' AND status != 'FAILED' ORDER BY startedAt DESC")
+    fun getActiveContracts(): Flow<List<FreelanceContract>>
+    
+    @Query("SELECT * FROM freelance_contract WHERE status = 'DELAYED' ORDER BY startedAt DESC")
+    fun getDelayedContracts(): Flow<List<FreelanceContract>>
+    
+    @Query("SELECT * FROM freelance_contract WHERE id = :id")
+    suspend fun getContractOnce(id: String): FreelanceContract?
+    
+    @Query("SELECT * FROM freelance_contract")
+    suspend fun getAllContractsOnce(): List<FreelanceContract>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertContract(contract: FreelanceContract)
+    
+    @Update
+    suspend fun updateContract(contract: FreelanceContract)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface SmartPersonDao {
+    @Query("SELECT * FROM smart_person")
+    fun getAllPeople(): Flow<List<SmartPerson>>
+    
+    @Query("SELECT * FROM smart_person WHERE id = :id")
+    suspend fun getPerson(id: String): SmartPerson?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPerson(person: SmartPerson)
+    
+    @Update
+    suspend fun updatePerson(person: SmartPerson)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface CounselingSessionDao {
+    @Query("SELECT * FROM counseling_session WHERE personId = :personId ORDER BY createdAt DESC")
+    fun getSessionsForPerson(personId: String): Flow<List<CounselingSession>>
+    
+    @Query("SELECT * FROM counseling_session WHERE id = :id")
+    suspend fun getSession(id: String): CounselingSession?
+    
+    @Query("SELECT * FROM counseling_session")
+    suspend fun getAllSessionsOnce(): List<CounselingSession>
+
+    @Query("SELECT * FROM counseling_session ORDER BY createdAt DESC")
+    fun getAllSessionsFlow(): Flow<List<CounselingSession>>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSession(session: CounselingSession)
+    
+    @Update
+    suspend fun updateSession(session: CounselingSession)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface BettingMatchDao {
+    @Query("SELECT * FROM betting_match WHERE isFinished = 0 ORDER BY matchTime ASC")
+    fun getUpcomingMatches(): Flow<List<BettingMatch>>
+
+    @Query("SELECT * FROM betting_match WHERE isFinished = 0 ORDER BY matchTime ASC")
+    suspend fun getUpcomingMatchesOnce(): List<BettingMatch>
+    
+    @Query("SELECT * FROM betting_match WHERE isFinished = 1 ORDER BY matchTime DESC")
+    fun getFinishedMatches(): Flow<List<BettingMatch>>
+    
+    @Query("SELECT * FROM betting_match WHERE id = :id")
+    suspend fun getMatch(id: String): BettingMatch?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMatch(match: BettingMatch)
+    
+    @Update
+    suspend fun updateMatch(match: BettingMatch)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface BetSlipDao {
+    @Query("SELECT * FROM bet_slip ORDER BY placedAt DESC")
+    fun getAllBets(): Flow<List<BetSlip>>
+
+    @Query("SELECT * FROM bet_slip ORDER BY placedAt DESC")
+    suspend fun getAllBetsOnce(): List<BetSlip>
+    
+    @Query("SELECT * FROM bet_slip WHERE status = 'PENDING' ORDER BY placedAt DESC")
+    fun getPendingBets(): Flow<List<BetSlip>>
+    
+    @Query("SELECT * FROM bet_slip WHERE id = :id")
+    suspend fun getBet(id: String): BetSlip?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertBet(slip: BetSlip)
+    
+    @Update
+    suspend fun updateBet(slip: BetSlip)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface BettingBalanceDao {
+    @Query("SELECT * FROM betting_balance WHERE id = 'betting_wallet'")
+    suspend fun getBalance(): BettingBalance?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertBalance(balance: BettingBalance)
+    
+    @Update
+    suspend fun updateBalance(balance: BettingBalance)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface PonziSchemeDao {
+    @Query("SELECT * FROM ponzi_scheme ORDER BY createdAt DESC")
+    fun getAllSchemes(): Flow<List<PonziScheme>>
+
+    @Query("SELECT * FROM ponzi_scheme")
+    suspend fun getAllSchemesOnce(): List<PonziScheme>
+    
+    @Query("SELECT * FROM ponzi_scheme WHERE id = :id")
+    suspend fun getScheme(id: String): PonziScheme?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertScheme(scheme: PonziScheme)
+    
+    @Update
+    suspend fun updateScheme(scheme: PonziScheme)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface PonziInvestmentDao {
+    @Query("SELECT * FROM ponzi_investment ORDER BY investedAt DESC")
+    fun getAllInvestments(): Flow<List<PonziInvestment>>
+    
+    @Query("SELECT * FROM ponzi_investment WHERE schemeId = :schemeId ORDER BY investedAt DESC")
+    fun getInvestmentsByScheme(schemeId: String): Flow<List<PonziInvestment>>
+
+    @Query("SELECT * FROM ponzi_investment WHERE schemeId = :schemeId")
+    suspend fun getInvestmentsBySchemeOnce(schemeId: String): List<PonziInvestment>
+    
+    @Query("SELECT * FROM ponzi_investment WHERE id = :id")
+    suspend fun getInvestment(id: String): PonziInvestment?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertInvestment(investment: PonziInvestment)
+    
+    @Update
+    suspend fun updateInvestment(investment: PonziInvestment)
+}
+
+// ==================== BANKING DAOs ====================
+
+@Dao
+@TypeConverters(Converters::class)
+interface MobileMoneyAccountDao {
+    @Query("SELECT * FROM mobile_money_account WHERE phoneNumber = :phone")
+    suspend fun getAccount(phone: String): MobileMoneyAccount?
+    
+    @Query("SELECT * FROM mobile_money_account WHERE isRegistered = 1")
+    fun getAllAccounts(): Flow<List<MobileMoneyAccount>>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAccount(account: MobileMoneyAccount)
+    
+    @Update
+    suspend fun updateAccount(account: MobileMoneyAccount)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface MobileMoneyTransactionDao {
+    @Query("SELECT * FROM mobile_money_transaction WHERE fromPhone = :phone ORDER BY timestamp DESC")
+    fun getTransactionsForPhone(phone: String): Flow<List<MobileMoneyTransaction>>
+    
+    @Query("SELECT * FROM mobile_money_transaction ORDER BY timestamp DESC")
+    fun getAllTransactions(): Flow<List<MobileMoneyTransaction>>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTransaction(transaction: MobileMoneyTransaction)
+    
+    @Update
+    suspend fun updateTransaction(transaction: MobileMoneyTransaction)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface BankAccountDao {
+    @Query("SELECT * FROM bank_account WHERE accountNumber = :account")
+    suspend fun getAccount(account: String): BankAccount?
+    
+    @Query("SELECT * FROM bank_account WHERE accountName = :name")
+    suspend fun getAccountsByName(name: String): List<BankAccount>
+    
+    @Query("SELECT * FROM bank_account WHERE isActive = 1")
+    fun getAllAccounts(): Flow<List<BankAccount>>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAccount(account: BankAccount)
+    
+    @Update
+    suspend fun updateAccount(account: BankAccount)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface BankTransactionDao {
+    @Query("SELECT * FROM bank_transaction WHERE accountNumber = :account ORDER BY timestamp DESC")
+    fun getTransactionsForAccount(account: String): Flow<List<BankTransaction>>
+    
+    @Query("SELECT * FROM bank_transaction ORDER BY timestamp DESC")
+    fun getAllTransactions(): Flow<List<BankTransaction>>
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTransaction(transaction: BankTransaction)
+    
+    @Update
+    suspend fun updateTransaction(transaction: BankTransaction)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface CentralBankDao {
+    @Query("SELECT * FROM central_bank_state WHERE id = 'cbk_main'")
+    suspend fun getState(): CentralBankState?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertState(state: CentralBankState)
+    
+    @Update
+    suspend fun updateState(state: CentralBankState)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface NpcPlayerDao {
+    @Query("SELECT * FROM npc_player WHERE playerType = 'CPU_NPC'")
+    fun getCpuNpcs(): Flow<List<NpcPlayer>>
+    
+    @Query("SELECT * FROM npc_player WHERE id = :id")
+    suspend fun getNpc(id: String): NpcPlayer?
+    
+    @Query("SELECT * FROM npc_player WHERE phoneNumber = :phone")
+    suspend fun getNpcByPhone(phone: String): NpcPlayer?
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNpc(npc: NpcPlayer)
+    
+    @Update
+    suspend fun updateNpc(npc: NpcPlayer)
 }

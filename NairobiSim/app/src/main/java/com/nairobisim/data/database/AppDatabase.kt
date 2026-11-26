@@ -17,9 +17,28 @@ import com.nairobisim.model.*
         Loan::class,
         ChamaGroup::class,
         MarketEvent::class,
-        SimulationState::class
+        SimulationState::class,
+        ForexTrade::class,
+        ShareTrade::class,
+        UserProfile::class,
+        SharpBoyEncounter::class,
+        PlayerEconomicState::class,
+        FreelanceContract::class,
+        SmartPerson::class,
+        CounselingSession::class,
+        BettingMatch::class,
+        BetSlip::class,
+        BettingBalance::class,
+        PonziScheme::class,
+        PonziInvestment::class,
+        MobileMoneyAccount::class,
+        MobileMoneyTransaction::class,
+        BankAccount::class,
+        BankTransaction::class,
+        CentralBankState::class,
+        NpcPlayer::class
     ],
-    version = 1,
+    version = 9,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -31,6 +50,38 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun chamaDao(): ChamaDao
     abstract fun marketEventDao(): MarketEventDao
     abstract fun simulationStateDao(): SimulationStateDao
+    abstract fun forexTradeDao(): ForexTradeDao
+    abstract fun shareTradeDao(): ShareTradeDao
+    abstract fun userProfileDao(): UserProfileDao
+    abstract fun sharpBoyEncounterDao(): SharpBoyEncounterDao
+    
+    abstract fun freelanceContractDao(): FreelanceContractDao
+    
+    abstract fun smartPersonDao(): SmartPersonDao
+    
+    abstract fun counselingSessionDao(): CounselingSessionDao
+    
+    abstract fun bettingMatchDao(): BettingMatchDao
+    
+    abstract fun betSlipDao(): BetSlipDao
+    
+    abstract fun bettingBalanceDao(): BettingBalanceDao
+    
+    abstract fun ponziSchemeDao(): PonziSchemeDao
+    
+    abstract fun ponziInvestmentDao(): PonziInvestmentDao
+    
+    abstract fun mobileMoneyAccountDao(): MobileMoneyAccountDao
+    
+    abstract fun mobileMoneyTransactionDao(): MobileMoneyTransactionDao
+    
+    abstract fun bankAccountDao(): BankAccountDao
+    
+    abstract fun bankTransactionDao(): BankTransactionDao
+    
+    abstract fun centralBankDao(): CentralBankDao
+    
+    abstract fun npcPlayerDao(): NpcPlayerDao
     
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null

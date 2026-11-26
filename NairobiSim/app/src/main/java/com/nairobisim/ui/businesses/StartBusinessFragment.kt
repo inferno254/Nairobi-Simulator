@@ -96,7 +96,7 @@ class StartBusinessFragment : Fragment() {
         when {
             category != null && location != null -> {
                 val capital = (category.baseCapital * location.rentMultiplier).toLong()
-                val estimatedRevenue = (category.baseCapital / 5 * location.demandMultiplier).toLong()
+                val estimatedRevenue = (category.baseCapital / 5 * 1.0).toLong()
                 binding.tvSummary.text = getString(
                     R.string.business_summary,
                     category.displayName,
@@ -146,11 +146,7 @@ class CategorySelectAdapter : androidx.recyclerview.widget.ListAdapter<BusinessC
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(category: BusinessCategory) {
             binding.category = category
-            binding.isSelected = category == (binding.root.tag as BusinessCategory?)
-            binding.onClick = { v ->
-                v.tag = category
-                onItemClick?.invoke(category)
-            }
+            itemView.setOnClickListener { onItemClick?.invoke(category) }
             binding.executePendingBindings()
         }
     }
@@ -179,11 +175,7 @@ class LocationSelectAdapter : androidx.recyclerview.widget.ListAdapter<NairobiAr
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(location: NairobiArea) {
             binding.location = location
-            binding.isSelected = location == (binding.root.tag as NairobiArea?)
-            binding.onClick = { v ->
-                v.tag = location
-                onItemClick?.invoke(location)
-            }
+            itemView.setOnClickListener { onItemClick?.invoke(location) }
             binding.executePendingBindings()
         }
     }

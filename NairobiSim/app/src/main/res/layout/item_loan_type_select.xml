@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="loanType"
             type="com.nairobisim.model.LoanType" />
@@ -21,7 +23,7 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="@{isSelected ? 4f : 1f}"
         app:strokeColor="@{isSelected ? @color/nairobi_blue : @color/nairobi_grey_light}"
-        app:strokeWidth="@{isSelected ? 2f : 0f}"
+        app:strokeWidth="1dp"
         android:onClick="@{onClick}"
         android:foreground="?android:attr/selectableItemBackground">
 
@@ -79,7 +81,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{\"KES \" + loanType.minAmount / 1000 + \"K - \" + loanType.maxAmount / 1000 + \"K\"}"
+                            android:text="@{&quot;KES &quot; + loanType.minAmount / 1000 + &quot;K - &quot; + loanType.maxAmount / 1000 + &quot;K&quot;}"
                             android:textSize="11sp"
                             android:textColor="@color/nairobi_green"
                             tools:text="KES 100K - 5M" />
@@ -88,7 +90,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="@{(loanType.interestRate * 100).toInt() + \"% APR\"}"
+                            android:text="@{@string/apr_format((int)(loanType.interestRate * 100))}"
                             android:textSize="11sp"
                             android:textColor="@color/nairobi_orange"
                             tools:text="14% APR" />
@@ -97,7 +99,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="@{loanType.minTerm + \"-\" + loanType.maxTerm + \" months\"}"
+                            android:text="@{loanType.minTerm + &quot;-&quot; + loanType.maxTerm + &quot; months&quot;}"
                             android:textSize="11sp"
                             android:textColor="@color/nairobi_grey"
                             tools:text="12-60 months" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -51,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="@{business.category.displayName + \" • \" + business.location.displayName}"
+                    android:text="@{business.category.displayName + &quot; • &quot; + business.location.displayName}"
                     android:textSize="12sp"
                     android:textColor="@color/nairobi_grey"
                     tools:text="Transport • CBD" />
@@ -65,7 +66,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{\"Level \" + business.level}"
+                            android:text="@{&quot;Level &quot; + business.level}"
                             android:textSize="11sp"
                             android:paddingHorizontal="6dp"
                             android:paddingVertical="2dp"
@@ -76,7 +77,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="@{business.isOperational ? \"Operational\" : \"Closed\"}"
+                            android:text="@{business.isOperational ? &quot;Operational&quot; : &quot;Closed&quot;}"
                             android:textSize="11sp"
                             android:textColor="@{business.isOperational ? @color/income_green : @color/expense_red}" />
 
@@ -103,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="@{\"Revenue: \" + viewModel.formatKes(business.monthlyRevenue)}"
+                    android:text="@{&quot;Revenue: &quot; + viewModel.formatKes(business.monthlyRevenue)}"
                     android:textSize="11sp"
                     android:textColor="@color/nairobi_grey" />
 

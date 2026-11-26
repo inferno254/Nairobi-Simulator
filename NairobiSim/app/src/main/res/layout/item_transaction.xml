@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -13,8 +15,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp 16dp">
+android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="16dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="40dp"
@@ -50,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@{transaction.category + \" • \" + transaction.date}"
+                android:text="@{transaction.category + &quot; • &quot; + transaction.date}"
                 android:textSize="11sp"
                 android:textColor="@color/nairobi_grey"
                 tools:text="Transport • Dec 21, 2024" />
@@ -76,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@{@string/kes_balance + \" \" + viewModel.formatKes(transaction.balanceAfter)}"
+                android:text="@{@string/kes_balance + &quot; &quot; + viewModel.formatKes(transaction.balanceAfter)}"
                 android:textSize="11sp"
                 android:textColor="@color/nairobi_grey"
                 tools:text="Balance: KES 250,000" />

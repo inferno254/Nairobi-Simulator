@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="entry"
+            type="com.nairobisim.model.LeaderboardEntry" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/nairobi_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/rank_text"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="#1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_primary"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entrepreneur Name"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary" />
+
+                <TextView
+                    android:id="@+id/badge_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌱 Hustler"
+                    android:textSize="12sp"
+                    android:textColor="@color/nairobi_accent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/net_worth_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="KES 1,000,000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_primary" />
+
+                <TextView
+                    android:id="@+id/details_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Level 5 • 3 businesses"
+                    android:textSize="11sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="category"
             type="com.nairobisim.model.BusinessCategory" />
@@ -21,7 +23,7 @@
         app:cardCornerRadius="12dp"
         app:cardElevation="@{isSelected ? 4f : 1f}"
         app:strokeColor="@{isSelected ? @color/nairobi_green : @color/nairobi_grey_light}"
-        app:strokeWidth="@{isSelected ? 2f : 0f}"
+        app:strokeWidth="1dp"
         android:onClick="@{onClick}"
         android:foreground="?android:attr/selectableItemBackground">
 
@@ -74,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@{\"Capital: \" + category.baseCapital}"
+                    android:text="@{&quot;Capital: &quot; + category.baseCapital}"
                     android:textSize="12sp"
                     android:textColor="@color/nairobi_green"
                     tools:text="Capital: KES 500,000" />

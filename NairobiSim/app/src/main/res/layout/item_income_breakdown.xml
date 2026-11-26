@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -22,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp 16dp">
+            android:paddingLeft="12dp"
+            android:paddingRight="16dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="40dp"
@@ -58,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="@{business.category.displayName + \" • \" + business.location.displayName}"
+                    android:text="@{business.category.displayName + &quot; • &quot; + business.location.displayName}"
                     android:textSize="12sp"
                     android:textColor="@color/nairobi_grey"
                     tools:text="Transport • CBD" />

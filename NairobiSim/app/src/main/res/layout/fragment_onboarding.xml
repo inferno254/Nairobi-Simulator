@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.nairobisim.ui.onboarding.OnboardingViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
+
+            <!-- Progress -->
+            <TextView
+                android:id="@+id/step_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_text_primary" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:max="100"
+                android:progress="0" />
+
+            <!-- Welcome Step -->
+            <LinearLayout
+                android:id="@+id/welcome_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="24dp"
+                    app:srcCompat="@drawable/ic_launcher_foreground" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome to Nairobi Sim"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/nairobi_primary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Build your business empire in Kenya's capital. From a small kiosk to a sprawling enterprise, every decision counts."
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Let's create your entrepreneur profile."
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary" />
+
+            </LinearLayout>
+
+            <!-- Name Step -->
+            <LinearLayout
+                android:id="@+id/name_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="What's your name?"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="This will appear on the leaderboard"
+                    android:textSize="14sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/player_name_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter your name"
+                        android:inputType="textPersonName"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <!-- Background Step -->
+            <LinearLayout
+                android:id="@+id/background_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Background Story"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Choose how you started your journey"
+                    android:textSize="14sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <RadioGroup
+                    android:id="@+id/background_options"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+            <!-- Location Step -->
+            <LinearLayout
+                android:id="@+id/location_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Choose Your Nairobi Area"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Where will your business be located?"
+                    android:textSize="14sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <RadioGroup
+                    android:id="@+id/location_options"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+            <!-- Business Step -->
+            <LinearLayout
+                android:id="@+id/business_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Choose Your First Business"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="What will you start with?"
+                    android:textSize="14sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+                <TextView
+                    android:id="@+id/estimated_balance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Estimated starting balance: KES 0"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_accent" />
+
+                <RadioGroup
+                    android:id="@+id/business_options"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+            <!-- Complete Step -->
+            <LinearLayout
+                android:id="@+id/complete_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="24dp"
+                    app:srcCompat="@drawable/ic_business" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You're Ready!"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/nairobi_primary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Your Nairobi business journey begins now. Good luck, entrepreneur!"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:textColor="@color/nairobi_text_secondary" />
+
+            </LinearLayout>
+
+            <!-- Navigation -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/prev_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Back" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:text="Next" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

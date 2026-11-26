@@ -94,9 +94,6 @@ class EmployeeAdapter : androidx.recyclerview.widget.ListAdapter<Employee, Emplo
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(employee: Employee) {
             binding.employee = employee
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
             binding.executePendingBindings()
         }
     }
@@ -123,9 +120,6 @@ class AssetAdapter : androidx.recyclerview.widget.ListAdapter<BusinessAsset, Ass
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(asset: BusinessAsset) {
             binding.asset = asset
-            binding.viewModel = (requireContext().applicationContext as com.nairobisim.NairobiSimApplication).let {
-                androidx.lifecycle.ViewModelProvider(it)[com.nairobisim.ui.main.MainViewModel::class.java]
-            }
             binding.executePendingBindings()
         }
     }

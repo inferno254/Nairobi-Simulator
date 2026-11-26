@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.nairobisim.ui.shares.ShareViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@color/nairobi_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/nairobi_surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NAIROBI SHARE MARKET"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/nairobi_primary"
+                        android:textAllCaps="true"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cash Available"
+                        android:textSize="14sp"
+                        android:textColor="@color/nairobi_text_secondary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.format(&quot;KES %.2f&quot;, viewModel.balance)}"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/nairobi_primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Share List -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AVAILABLE SHARES"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_primary"
+                android:textAllCaps="true"
+                android:layout_marginBottom="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sharesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Trade Panel -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/nairobi_surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PLACE TRADE"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/nairobi_primary"
+                        android:textAllCaps="true"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Company Selection -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:hintEnabled="false"
+                        app:boxBackgroundColor="@color/nairobi_input_bg">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/companySelector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.selectedCompany != null ? viewModel.selectedCompany.name : &quot;&quot;}"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:clickable="true"
+                            android:textSize="16sp"
+                            android:padding="14dp"
+                            android:textColor="@color/nairobi_text_primary"
+                            android:hint="Select Company" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Current Price Display -->
+                    <TextView
+                        android:id="@+id/tvCurrentPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Current Price: KES 0.00"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/nairobi_accent"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Shares Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:hintEnabled="false"
+                        app:boxBackgroundColor="@color/nairobi_input_bg">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etShares"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Number of Shares"
+                            android:inputType="number"
+                            android:textSize="16sp"
+                            android:padding="14dp"
+                            android:textColor="@color/nairobi_text_primary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Buy/Sell Buttons -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnBuyShares"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="4dp"
+                            android:text="BUY"
+                            android:textColor="@color/nairobi_success"
+                            app:icon="@drawable/ic_add"
+                            app:iconTint="@color/nairobi_success"
+                            android:backgroundTint="@color/nairobi_success_light"
+                            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSellShares"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:text="SELL"
+                            android:textColor="@color/nairobi_error"
+                            app:icon="@drawable/ic_remove"
+                            app:iconTint="@color/nairobi_error"
+                            android:backgroundTint="@color/nairobi_error_light"
+                            style="@style/Widget.Material3.Button.OutlinedButton" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnExecuteShareTrade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="EXECUTE TRADE"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:padding="16dp"
+                        app:cornerRadius="12dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Portfolio -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="YOUR PORTFOLIO"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_primary"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{&quot;(&quot; + viewModel.openPositions.size + &quot;)&quot;}"
+                    android:textSize="12sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/portfolioRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Trade History -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TRADE HISTORY"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_primary"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{&quot;(&quot; + viewModel.tradeHistory.size + &quot;)&quot;}"
+                    android:textSize="12sp"
+                    android:textColor="@color/nairobi_text_secondary" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/shareHistoryRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="24dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

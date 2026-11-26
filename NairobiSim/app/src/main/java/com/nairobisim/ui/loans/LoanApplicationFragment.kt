@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nairobisim.R
 import com.nairobisim.databinding.FragmentLoanApplicationBinding
+import com.nairobisim.model.LoanSource
 import com.nairobisim.model.LoanType
 import com.nairobisim.ui.main.MainViewModel
 
@@ -57,7 +58,7 @@ class LoanApplicationFragment : Fragment() {
                 val term = binding.etLoanTerm.text.toString().toIntOrNull() ?: 0
                 val purpose = binding.etLoanPurpose.text.toString()
                 
-                viewModel.applyForLoan(type, amount, term, purpose)
+                viewModel.takeLoan(LoanSource.BANK, amount, term)
                 findNavController().popBackStack()
             }
         }
@@ -84,16 +85,6 @@ class LoanApplicationFragment : Fragment() {
             loanTypeAdapter.notifyDataSetChanged()
             updateSubmitButton()
             updateSummary()
-        }
-        
-        // Check if a loan type was pre-selected
-        viewModel.selectedLoanType.observe(viewLifecycleOwner) { type ->
-            type?.let {
-                selectedLoanType = it
-                loanTypeAdapter.notifyDataSetChanged()
-                updateSubmitButton()
-                updateSummary()
-            }
         }
     }
     
@@ -171,11 +162,7 @@ class LoanTypeSelectAdapter : androidx.recyclerview.widget.ListAdapter<LoanType,
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         fun bind(loanType: LoanType) {
             binding.loanType = loanType
-            binding.isSelected = loanType == (binding.root.tag as LoanType?)
-            binding.onClick = { v ->
-                v.tag = loanType
-                onItemClick?.invoke(loanType)
-            }
+            itemView.setOnClickListener { onItemClick?.invoke(loanType) }
             binding.executePendingBindings()
         }
     }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_cars"
+        android:icon="@drawable/ic_car"
+        android:title="@string/tab_cars" />
+
+    <item
+        android:id="@+id/nav_shares"
+        android:icon="@drawable/ic_chart"
+        android:title="@string/tab_shares" />
+
+    <item
+        android:id="@+id/nav_sharpboys"
+        android:icon="@drawable/ic_run"
+        android:title="Sharp Boys" />
+
+    <item
+        android:id="@+id/freelanceFragment"
+        android:icon="@drawable/ic_pen"
+        android:title="@string/tab_freelance" />
+
+    <item
+        android:id="@+id/lifeMentorFragment"
+        android:icon="@drawable/ic_handshake"
+        android:title="@string/tab_life_mentor" />
+
+    <item
+        android:id="@+id/bettingFragment"
+        android:icon="@drawable/ic_trophy"
+        android:title="@string/tab_betting" />
+
+    <item
+        android:id="@+id/ponziFragment"
+        android:icon="@drawable/ic_alert"
+        android:title="@string/tab_ponzi" />
+
+    <item
+        android:id="@+id/bankingFragment"
+        android:icon="@drawable/ic_money"
+        android:title="@string/tab_banking" />
+
+    <item
+        android:id="@+id/nav_chama"
+        android:icon="@drawable/ic_chama"
+        android:title="Chama" />
+
+    <item
+        android:id="@+id/nav_finances"
+        android:icon="@drawable/ic_finance"
+        android:title="@string/tab_finances" />
+
+    <item
+        android:id="@+id/nav_loans"
+        android:icon="@drawable/ic_loan"
+        android:title="@string/tab_loans" />
+
+    <item
+        android:id="@+id/nav_events"
+        android:icon="@drawable/ic_events"
+        android:title="Events" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+
+</menu>

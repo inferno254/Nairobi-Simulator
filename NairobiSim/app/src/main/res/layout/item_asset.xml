@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -22,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp 16dp">
+            android:paddingLeft="12dp"
+            android:paddingRight="16dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="40dp"
@@ -72,7 +74,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{\"Revenue Boost: \" + (asset.revenueBonus * 100).toInt() + \"%\"}"
+                            android:text="@{&quot;Revenue Boost: &quot; + (asset.revenueBonus * 100) + &quot; %&quot;}"
                             android:textSize="11sp"
                             android:textColor="@color/income_green" />
 
@@ -80,7 +82,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="@{\"Maint: \" + viewModel.formatKes(asset.maintenanceCost) + \"/mo\"}"
+                            android:text="@{&quot;Maint: &quot; + viewModel.formatKes(asset.maintenanceCost) + &quot;/mo&quot;}"
                             android:textSize="11sp"
                             android:textColor="@color/expense_red" />
 
@@ -107,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="@{\"Durability: \" + asset.durability + \"%\"}"
+                    android:text="@{&quot;Durability: &quot; + asset.durability + &quot; %&quot;}"
                     android:textSize="11sp"
                     android:textColor="@color/nairobi_grey"
                     tools:text="Durability: 85%" />

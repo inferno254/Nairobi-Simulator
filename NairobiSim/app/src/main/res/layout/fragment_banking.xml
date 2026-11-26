@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/nairobi_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/nairobi_card"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NAIROBI BANKING SYSTEM"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_secondary"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile Money &amp; Banks"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nairobi_text_primary"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="M-Pesa, Airtel Money, KCB, Equity, Co-op, CBK - real Kenyan banking simulation"
+                    android:textSize="14sp"
+                    android:textColor="@color/nairobi_text_secondary"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Central Bank Info -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_stat_card">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CBR"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/nairobi_text_secondary" />
+
+                        <TextView
+                            android:id="@+id/txtCBR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12.5%"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/nairobi_primary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_stat_card">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Money Supply"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/nairobi_text_secondary" />
+
+                        <TextView
+                            android:id="@+id/txtMoneySupply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0%"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/nairobi_secondary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:background="@drawable/bg_stat_card">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Inflation"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/nairobi_text_secondary" />
+
+                        <TextView
+                            android:id="@+id/txtInflation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6.3%"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/nairobi_tertiary" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnUpdateCBK"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update Central Bank Policy"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/nairobi_secondary"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="12dp"
+                    style="@style/Widget.NairobiSim.Button.Primary" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- M-PESA SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M-PESA / AIRTEL MONEY"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_text_primary"
+                android:layout_marginBottom="12dp" />
+
+            <!-- M-Pesa Balance Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#2E7D32"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="M-PESA BALANCE"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/txtMpesaBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KES 0"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/txtMpesaPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Not registered"
+                        android:textSize="14sp"
+                        android:textColor="#CCFFCC"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Register Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/registerCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/nairobi_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:layout_marginTop="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Register M-Pesa Account"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/nairobi_text_primary" />
+
+                    <EditText
+                        android:id="@+id/edtPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone Number (2547XXXXXXXX)"
+                        android:inputType="phone"
+                        android:maxLength="13"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_stat_card"
+                        android:padding="8dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerProvider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
+
+                    <EditText
+                        android:id="@+id/edtPin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="4-digit PIN"
+                        android:inputType="numberPassword"
+                        android:maxLength="4"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_stat_card"
+                        android:padding="8dp" />
+
+                    <Button
+                        android:id="@+id/btnRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Register Account"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="@color/nairobi_primary"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.NairobiSim.Button.Primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- M-Pesa Actions -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/nairobi_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:layout_marginTop="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="M-Pesa Transactions"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/nairobi_text_primary" />
+
+                    <EditText
+                        android:id="@+id/edtSendPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Recipient Phone"
+                        android:inputType="phone"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_stat_card"
+                        android:padding="8dp" />
+
+                    <EditText
+                        android:id="@+id/edtSendAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount (KES)"
+                        android:inputType="number"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_stat_card"
+                        android:padding="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <Button
+                            android:id="@+id/btnSend"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="SEND"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:backgroundTint="@color/nairobi_primary"
+                            android:textColor="@android:color/white"
+                            android:layout_marginEnd="8dp"
+                            style="@style/Widget.NairobiSim.Button.Primary" />
+
+                        <Button
+                            android:id="@+id/btnPayBill"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="PAY BILL"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:backgroundTint="@color/nairobi_secondary"
+                            android:textColor="@android:color/white"
+                            style="@style/Widget.NairobiSim.Button.Primary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <Button
+                            android:id="@+id/btnAirtime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="AIRTIME"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:backgroundTint="@color/nairobi_warning"
+                            android:textColor="@android:color/white"
+                            android:layout_marginEnd="8dp"
+                            style="@style/Widget.NairobiSim.Button.Primary" />
+
+                        <Button
+                            android:id="@+id/btnDepositMpesa"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="BANK→M-PESA"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:backgroundTint="@color/nairobi_tertiary"
+                            android:textColor="@android:color/white"
+                            style="@style/Widget.NairobiSim.Button.Primary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Transaction History -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMpesaTxns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                tools:itemcount="5"
+                tools:listitem="@layout/item_mpesa_transaction" />
+        </LinearLayout>
+
+        <!-- BANKS SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="COMMERCIAL BANKS"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_text_primary"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Open Account Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/nairobi_card"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open Bank Account"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/nairobi_text_primary" />
+
+                    <Spinner
+                        android:id="@+id/spinnerBank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerAccountType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
+
+                    <EditText
+                        android:id="@+id/edtInitialDeposit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Initial Deposit (KES)"
+                        android:inputType="number"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_stat_card"
+                        android:padding="8dp" />
+
+                    <Button
+                        android:id="@+id/btnOpenAccount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Open Account"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="@color/nairobi_primary"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.NairobiSim.Button.Primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Bank Accounts List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerBankAccounts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                tools:itemcount="5"
+                tools:listitem="@layout/item_bank_account" />
+        </LinearLayout>
+
+        <!-- NPC PLAYERS SECTION -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NPC PLAYERS (CPU)"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/nairobi_text_primary"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="These are CPU-controlled players. When enough real users join, they become player-owned."
+                android:textSize="14sp"
+                android:textColor="@color/nairobi_text_secondary"
+                android:layout_marginBottom="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerNpcs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:itemcount="5"
+                tools:listitem="@layout/item_npc_player" />
+        </LinearLayout>
+
+        <!-- Result -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/resultContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/nairobi_surface_light"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/resultMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Result"
+                        android:textSize="15sp"
+                        android:textColor="@color/nairobi_text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <Button
+                        android:id="@+id/btnDismissResult"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Continue"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:backgroundTint="@color/nairobi_primary"
+                        android:textColor="@android:color/white"
+                        style="@style/Widget.NairobiSim.Button.Primary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

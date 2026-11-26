@@ -1,0 +1,92 @@
+<resources>
+    <!-- Dark mode - Nairobi-inspired vibrant primary palette -->
+    <color name="nairobi_primary">#69F0AE</color>
+    <color name="nairobi_primary_dark">#1A8A3A</color>
+<color name="nairobi_primary_light">#40FFFFFF</color>
+<color name="nairobi_primary_container">#1B5E20</color>
+<color name="nairobi_on_primary">#000000</color>
+
+    <!-- Secondary: Vibrant orange for dark mode -->
+    <color name="nairobi_secondary">#FFB74D</color>
+    <color name="nairobi_secondary_dark">#FB8C00</color>
+    <color name="nairobi_secondary_light">#40FFFFFF</color>
+    <color name="nairobi_secondary_container">#FF6F00</color>
+    <color name="nairobi_on_secondary">#000000</color>
+
+    <!-- Tertiary: Red for dark mode -->
+    <color name="nairobi_tertiary">#EF5350</color>
+    <color name="nairobi_tertiary_light">#2C1A1A</color>
+    <color name="nairobi_on_tertiary">#000000</color>
+
+    <!-- Background & Surface - Dark -->
+    <color name="nairobi_bg">#121212</color>
+    <color name="nairobi_bg_alt">#1A1A1A</color>
+    <color name="nairobi_surface">#1E1E1E</color>
+    <color name="nairobi_surface_light">#2A2A2A</color>
+    <color name="nairobi_card">#2A2A2A</color>
+    <color name="nairobi_card_elevated">#333333</color>
+
+    <!-- Text - High contrast white -->
+    <color name="nairobi_text_primary">#FFFFFF</color>
+    <color name="nairobi_text_secondary">#B0B0B0</color>
+    <color name="nairobi_text_disabled">#666666</color>
+    <color name="nairobi_text_on_primary">#000000</color>
+    <color name="nairobi_text_on_surface">#FFFFFF</color>
+
+    <!-- Dividers & Borders - Dark -->
+    <color name="nairobi_divider">#3A3A3A</color>
+    <color name="nairobi_border">#555555</color>
+    <color name="nairobi_input_bg">#2A2A2A</color>
+
+    <!-- Status colors - Dark -->
+    <color name="nairobi_success">#69F0AE</color>
+    <color name="nairobi_success_light">#1B5E20</color>
+    <color name="nairobi_error">#EF5350</color>
+    <color name="nairobi_error_light">#B71C1C</color>
+    <color name="nairobi_warning">#FFB74D</color>
+    <color name="nairobi_warning_light">#FF6F00</color>
+    <color name="nairobi_info">#64B5F6</color>
+    <color name="nairobi_info_light">#0D47A1</color>
+
+    <!-- Legacy color names (dark variants) -->
+    <color name="nairobi_green">#69F0AE</color>
+    <color name="nairobi_green_light">#4CAF50</color>
+    <color name="nairobi_green_dark">#003300</color>
+    <color name="nairobi_red">#EF5350</color>
+    <color name="nairobi_orange">#FFB74D</color>
+    <color name="nairobi_orange_light">#3E2723</color>
+    <color name="nairobi_yellow">#FFD54F</color>
+    <color name="nairobi_blue">#64B5F6</color>
+    <color name="nairobi_blue_light">#0D47A1</color>
+    <color name="nairobi_purple">#CE93D8</color>
+    <color name="nairobi_teal">#4DB6AC</color>
+    <color name="nairobi_brown">#8D6E63</color>
+    <color name="nairobi_grey">#9E9E9E</color>
+    <color name="nairobi_grey_light">#616161</color>
+    <color name="nairobi_white">#FFFFFF</color>
+    <color name="nairobi_black">#000000</color>
+    <color name="bottom_nav_active">#69F0AE</color>
+    <color name="bottom_nav_inactive">#8A8A8A</color>
+    <color name="income_green">#69F0AE</color>
+    <color name="expense_red">#EF5350</color>
+    <color name="expense_red_light">#2C1A1A</color>
+    <color name="investment_blue">#64B5F6</color>
+    <color name="loan_orange">#FFB74D</color>
+    <color name="mpesa_green">#69F0AE</color>
+    <color name="bank_blue">#64B5F6</color>
+
+    <!-- Semantic colors for dark mode -->
+    <color name="color_surface_variant">#333333</color>
+    <color name="color_on_surface_variant">#B0B0B0</color>
+    <color name="color_outline">#555555</color>
+    <color name="color_on_surface">#FFFFFF</color>
+    <color name="color_on_background">#FFFFFF</color>
+    <color name="color_primary_container">#1B5E20</color>
+    <color name="color_on_primary_container">#CCFFEE</color>
+    <color name="color_secondary_container">#FF6F00</color>
+    <color name="color_on_secondary_container">#000000</color>
+    <color name="color_tertiary_container">#B71C1C</color>
+    <color name="color_on_tertiary_container">#FFCDD2</color>
+    <color name="color_error_container">#B71C1C</color>
+    <color name="color_on_error_container">#FFCDD2</color>
+</resources>
