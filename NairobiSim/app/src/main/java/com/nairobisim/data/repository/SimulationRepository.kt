@@ -337,11 +337,23 @@ class SimulationRepository(private val db: AppDatabase) {
             }
         }
 
-        // Month boundary: KRA monthly tax close
+        // Month boundary: KRA monthly tax close + late penalties + accountant
         if (newMonth != prevMonth || newYear != prevYear) {
+            val taxRepo = TaxRepository(db)
             val period = "${newYear}-${(newMonth + 1).toString().padStart(2, '0')}"
-            val bill = TaxRepository(db).buildMonthlyBill(period)
-            if (bill.total > 0) TaxRepository(db).applyBill(bill)
+            val bill = taxRepo.buildMonthlyBill(period)
+            if (bill.total > 0) taxRepo.applyBill(bill)
+
+            // Quarterly (every 3rd month): VAT + business tax return, due in 30 days
+            if ((newMonth + 1) % 3 == 0) {
+                val quarter = "${newYear}-Q${(newMonth / 3) + 1}"
+                val dueAt = System.currentTimeMillis() + 30 * 86_400_000L
+                val qBill = taxRepo.buildQuarterlyBill(quarter, dueAt)
+                if (qBill.total > 0) taxRepo.applyBill(qBill)
+            }
+
+            taxRepo.applyLatePenalties()
+            taxRepo.accountantSettle()
         }
     }
 
@@ -378,5 +390,36 @@ class SimulationRepository(private val db: AppDatabase) {
             profile?.let { updatePlayerProfile(it.copy(kesBalance = (it.kesBalance ?: 0) + earned)) }
         }
         updateSimulationState(state.copy(lastTickRealTime = System.currentTimeMillis()))
+    }
+
+    // Daily login streak reward. Returns the reward credited (0 if already claimed today).
+    suspend fun applyLoginReward(): Long {
+        val profile = getPlayerProfile() ?: return 0
+        val cal = Calendar.getInstance()
+        val today = cal.get(Calendar.DAY_OF_YEAR)
+        val lastCal = Calendar.getInstance().apply { time = profile.lastLogin }
+        val lastDay = lastCal.get(Calendar.DAY_OF_YEAR)
+        val lastYear = lastCal.get(Calendar.YEAR)
+        val curYear = cal.get(Calendar.YEAR)
+
+        val alreadyToday = (today == lastDay && curYear == lastYear)
+        if (alreadyToday) return 0
+
+        val gap = when {
+            curYear != lastYear -> 999
+            else -> today - lastDay
+        }
+        val newStreak = if (gap == 1) profile.dailyStreak + 1 else 1
+        // Escalating reward: base 1,000 * streak, capped at 50,000
+        val reward = (1000L * newStreak).coerceAtMost(50_000L)
+
+        updatePlayerProfile(
+            profile.copy(
+                kesBalance = (profile.kesBalance ?: 0) + reward,
+                dailyStreak = newStreak,
+                lastLogin = Date()
+            )
+        )
+        return reward
     }
 }

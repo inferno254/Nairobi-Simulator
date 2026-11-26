@@ -32,6 +32,7 @@ data class PlayerProfile(
     var bribeHistory: List<BribeEncounter> = emptyList(), // JSON stored
     var totalNetWorth: Long? = 50000,                     // calculated net worth
     var isProfileComplete: Boolean = false,               // onboarding flag
+    var hasAccountant: Boolean = false,                   // auto-pays taxes each period
     val unlockRequirements: UnlockRequirements
 ) {
     val displayName: String

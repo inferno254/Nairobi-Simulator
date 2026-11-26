@@ -115,7 +115,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             } else {
                 // Credit offline earnings accrued while the app was closed
                 repository.applyOfflineEarnings()
+                // Daily login streak reward
+                val reward = repository.applyLoginReward()
+                if (reward > 0) {
+                    val streak = repository.getPlayerProfile()?.dailyStreak ?: 1
+                    _toastMessage.postValue("Daily reward: KES $reward  •  Streak: $streak days")
+                }
             }
+            refreshProfileFlags()
         }
     }
     
@@ -290,6 +297,28 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val paid = taxRepository.applyBill(bill)
             _toastMessage.postValue(if (paid) "Paid KES ${bill.total} in taxes" else "Insufficient funds for taxes (KES ${bill.total})")
             _unpaidTax.postValue(taxRepository.totalUnpaid())
+        }
+    }
+
+    private val _hasAccountant = MutableLiveData<Boolean>(false)
+    val hasAccountant: LiveData<Boolean> = _hasAccountant
+
+    private val _streak = MutableLiveData<Int>(0)
+    val streak: LiveData<Int> = _streak
+
+    fun refreshProfileFlags() {
+        viewModelScope.launch {
+            val p = repository.getPlayerProfile()
+            _hasAccountant.postValue(p?.hasAccountant ?: false)
+            _streak.postValue(p?.dailyStreak ?: 0)
+        }
+    }
+
+    fun hireAccountant() {
+        viewModelScope.launch {
+            val ok = taxRepository.hireAccountant(25_000)
+            _toastMessage.postValue(if (ok) "Accountant hired! Taxes auto-paid each period." else "Need KES 25,000 to hire an accountant")
+            refreshProfileFlags()
         }
     }
 

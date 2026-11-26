@@ -43,8 +43,12 @@ data class TaxRecord(
     val taxableBase: Long,
     val amount: Long,
     val paid: Boolean = false,
+    val dueAt: Long? = null,     // deadline for quarterly filings
+    val penalty: Long = 0,       // late-filing penalty accrued
     val createdAt: Long = System.currentTimeMillis()
-)
+) {
+    val totalDue: Long get() = amount + penalty
+}
 
 // A full tax bill produced at period close
 data class TaxBill(

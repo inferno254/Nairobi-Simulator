@@ -68,18 +68,83 @@ class TaxRepository(private val db: AppDatabase) {
         return true
     }
 
+    // Build a quarterly KRA bill (VAT + business tax) with a filing deadline.
+    suspend fun buildQuarterlyBill(quarter: String, dueAt: Long): TaxBill {
+        val businesses = db.businessDao().getActiveBusinessesOnce()
+        val quarterRevenue = businesses.sumOf { it.calculateRevenue() } // 3 months of monthly revenue
+        val lines = mutableListOf<TaxRecord>()
+
+        // VAT 16% on taxable sales
+        val vat = (quarterRevenue * 0.16).toLong()
+        lines.add(TaxRecord("tax_${quarter}_vat", TaxType.VAT, quarter, quarterRevenue, vat, dueAt = dueAt))
+
+        // Business tax 1% of turnover
+        val biz = (quarterRevenue * 0.01).toLong()
+        lines.add(TaxRecord("tax_${quarter}_bizq", TaxType.BUSINESS_TAX, quarter, quarterRevenue, biz, dueAt = dueAt))
+
+        return TaxBill(quarter, lines, lines.sumOf { it.amount })
+    }
+
+    // Add late-filing penalties to unpaid quarterly records past their deadline.
+    // 5% base + 1% per 30 days late (KRA-style escalating penalty).
+    suspend fun applyLatePenalties() {
+        val now = System.currentTimeMillis()
+        val unpaid = db.taxRecordDao().getAllRecordsOnce().filter { !it.paid && it.dueAt != null }
+        for (r in unpaid) {
+            val due = r.dueAt ?: continue
+            if (now > due) {
+                val daysLate = ((now - due) / 86_400_000L).toInt()
+                val monthsLate = (daysLate / 30).coerceAtMost(6)
+                val penalty = (r.amount * (0.05 + 0.01 * monthsLate)).toLong()
+                if (penalty > r.penalty) {
+                    db.taxRecordDao().updateRecord(r.copy(penalty = penalty))
+                }
+            }
+        }
+    }
+
+    // Accountant auto-pays all due bills if the balance covers them.
+    suspend fun accountantSettle(): Long {
+        val profile = db.playerProfileDao().getProfileOnce("player_1") ?: return 0
+        if (!profile.hasAccountant) return 0
+        var balance = profile.kesBalance ?: 0L
+        var paidTotal = 0L
+        val unpaid = db.taxRecordDao().getAllRecordsOnce().filter { !it.paid }
+        for (r in unpaid) {
+            if (balance >= r.totalDue) {
+                balance -= r.totalDue
+                paidTotal += r.totalDue
+                db.taxRecordDao().updateRecord(r.copy(paid = true))
+            }
+        }
+        if (paidTotal > 0) {
+            db.playerProfileDao().updateProfile(profile.copy(kesBalance = balance))
+        }
+        return paidTotal
+    }
+
+    suspend fun hireAccountant(cost: Long): Boolean {
+        val profile = db.playerProfileDao().getProfileOnce("player_1") ?: return false
+        if (profile.hasAccountant) return false
+        if ((profile.kesBalance ?: 0L) < cost) return false
+        db.playerProfileDao().updateProfile(
+            profile.copy(kesBalance = (profile.kesBalance ?: 0L) - cost, hasAccountant = true)
+        )
+        return true
+    }
+
     // Pay a single unpaid record
     suspend fun payRecord(recordId: String): Boolean {
         val record = db.taxRecordDao().getRecord(recordId) ?: return false
         if (record.paid) return false
         val profile = db.playerProfileDao().getProfileOnce("player_1") ?: return false
         val balance = profile.kesBalance ?: 0L
-        if (balance < record.amount) return false
-        db.playerProfileDao().updateProfile(profile.copy(kesBalance = balance - record.amount))
+        if (balance < record.totalDue) return false
+        db.playerProfileDao().updateProfile(profile.copy(kesBalance = balance - record.totalDue))
         db.taxRecordDao().updateRecord(record.copy(paid = true))
         return true
     }
 
     suspend fun totalUnpaid(): Long =
-        db.taxRecordDao().getAllRecordsOnce().filter { !it.paid }.sumOf { it.amount }
+        db.taxRecordDao().getAllRecordsOnce().filter { !it.paid }.sumOf { it.totalDue }
 }

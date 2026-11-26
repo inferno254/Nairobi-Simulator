@@ -40,7 +40,7 @@ import com.nairobisim.model.*
         TaxRecord::class,
         Election::class
     ],
-    version = 10,
+    version = 11,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

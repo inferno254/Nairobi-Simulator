@@ -116,9 +116,13 @@ class DashboardFragment : Fragment() {
         binding.btnSpeedNormal.setOnClickListener { viewModel.setGameSpeed(GameSpeed.NORMAL) }
         binding.btnSpeedFast.setOnClickListener { viewModel.setGameSpeed(GameSpeed.FAST) }
         binding.btnPayTaxes.setOnClickListener { viewModel.payTaxes() }
+        binding.btnAccountant.setOnClickListener { viewModel.hireAccountant() }
 
         viewModel.unpaidTax.observe(viewLifecycleOwner) { amount ->
             binding.txtUnpaidTax.text = viewModel.formatKes(amount ?: 0L)
+        }
+        viewModel.streak.observe(viewLifecycleOwner) { s ->
+            binding.txtStreak.text = "Login streak: ${s ?: 0} days"
         }
 
         businessAdapter.onItemClick = { business ->
