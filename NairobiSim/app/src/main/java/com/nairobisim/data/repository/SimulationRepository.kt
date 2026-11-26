@@ -295,24 +295,57 @@ class SimulationRepository(private val db: AppDatabase) {
     }
 
     // Utility
-    suspend fun advanceDay() {
-        val state = getSimulationState()?.copy(
-            currentDate = Date(System.currentTimeMillis() + 86400000),
-            totalDaysSimulated = (getSimulationState()?.totalDaysSimulated ?: 0) + 1
-        )
-        state?.let { updateSimulationState(it) }
+    // Continuous time accrual: advance the in-game clock by gameMinutes and credit
+    // each business's hourly profit proportionally (Business Empire style).
+    suspend fun accrueTime(gameMinutes: Long) {
+        val state = getSimulationState() ?: return
+        if (gameMinutes <= 0) return
 
-        // Process daily collections
+        val prevCal = Calendar.getInstance().apply { time = state.currentDate }
+        val prevDay = prevCal.get(Calendar.DAY_OF_YEAR)
+        val prevMonth = prevCal.get(Calendar.MONTH)
+        val prevYear = prevCal.get(Calendar.YEAR)
+
+        val newDate = Date(state.currentDate.time + gameMinutes * 60_000L)
+        val newCal = Calendar.getInstance().apply { time = newDate }
+        val newDay = newCal.get(Calendar.DAY_OF_YEAR)
+        val newMonth = newCal.get(Calendar.MONTH)
+        val newYear = newCal.get(Calendar.YEAR)
+
+        // Credit continuous profit
         val businesses = db.businessDao().getActiveBusinesses().first()
-        businesses.forEach { business ->
-            val dailyRevenue = business.calculateRevenue() / 30
-            val dailyExpenses = business.monthlyExpenses / 30
-
-            val profile = getPlayerProfile()?.copy(kesBalance = (getPlayerProfile()?.kesBalance ?: 0) + dailyRevenue - dailyExpenses)
-            profile?.let { updatePlayerProfile(it) }
+        val totalHourly = businesses.sumOf { it.hourlyProfit }
+        val earned = (totalHourly * gameMinutes / 60.0).toLong()
+        if (earned != 0L) {
+            val profile = getPlayerProfile()
+            profile?.let { updatePlayerProfile(it.copy(kesBalance = (it.kesBalance ?: 0) + earned)) }
         }
 
-        // Process loan payments
+        updateSimulationState(
+            state.copy(currentDate = newDate, lastTickRealTime = System.currentTimeMillis())
+        )
+
+        // Day boundary: loans + elections
+        var dayDiff = newDay - prevDay
+        if (dayDiff <= 0 && (newMonth != prevMonth || newYear != prevYear)) dayDiff += 365
+        if (dayDiff > 0) {
+            processLoans()
+            val electionRepo = ElectionRepository(db)
+            val active = db.electionDao().getActiveElections().first()
+            repeat(dayDiff.coerceAtMost(30)) {
+                active.forEach { electionRepo.tickDay(it.id) }
+            }
+        }
+
+        // Month boundary: KRA monthly tax close
+        if (newMonth != prevMonth || newYear != prevYear) {
+            val period = "${newYear}-${(newMonth + 1).toString().padStart(2, '0')}"
+            val bill = TaxRepository(db).buildMonthlyBill(period)
+            if (bill.total > 0) TaxRepository(db).applyBill(bill)
+        }
+    }
+
+    private suspend fun processLoans() {
         val loans = db.loanDao().getActiveLoans().first()
         loans.forEach { loan ->
             if (loan.nextPaymentDate.before(Date())) {
@@ -324,5 +357,26 @@ class SimulationRepository(private val db: AppDatabase) {
                 }
             }
         }
+    }
+
+    // Advance a full in-game day (manual "Next Day")
+    suspend fun advanceDay() {
+        accrueTime(1440)
+    }
+
+    // Credit offline earnings for elapsed real time while the app was closed.
+    suspend fun applyOfflineEarnings() {
+        val state = getSimulationState() ?: return
+        val elapsedMs = System.currentTimeMillis() - state.lastTickRealTime
+        if (elapsedMs < 60_000) return
+        val businesses = db.businessDao().getActiveBusinesses().first()
+        val totalHourly = businesses.sumOf { it.hourlyProfit }
+        val cappedMs = minOf(elapsedMs, 12 * 3600_000L) // up to 12 real hours
+        val earned = (totalHourly * cappedMs / 3_600_000.0).toLong()
+        if (earned != 0L) {
+            val profile = getPlayerProfile()
+            profile?.let { updatePlayerProfile(it.copy(kesBalance = (it.kesBalance ?: 0) + earned)) }
+        }
+        updateSimulationState(state.copy(lastTickRealTime = System.currentTimeMillis()))
     }
 }

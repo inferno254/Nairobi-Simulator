@@ -36,9 +36,11 @@ import com.nairobisim.model.*
         BankAccount::class,
         BankTransaction::class,
         CentralBankState::class,
-        NpcPlayer::class
+        NpcPlayer::class,
+        TaxRecord::class,
+        Election::class
     ],
-    version = 9,
+    version = 10,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -82,6 +84,10 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun centralBankDao(): CentralBankDao
     
     abstract fun npcPlayerDao(): NpcPlayerDao
+
+    abstract fun taxRecordDao(): TaxRecordDao
+
+    abstract fun electionDao(): ElectionDao
     
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null

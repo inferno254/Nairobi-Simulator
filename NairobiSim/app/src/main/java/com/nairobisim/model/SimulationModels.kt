@@ -65,7 +65,11 @@ data class Business(
 ) {
     val netMonthlyIncome: Long
         get() = monthlyRevenue - monthlyExpenses
-    
+
+    // Continuous per-hour profit (30-day month = 720 hours), like Business Empire
+    val hourlyProfit: Double
+        get() = netMonthlyIncome / 720.0
+
     fun calculateRevenue(): Long {
         val baseRevenue = when (category) {
             BusinessCategory.MATATU_SACCO -> 150000L * level
@@ -435,7 +439,8 @@ data class SimulationState(
     var gameSpeed: GameSpeed = GameSpeed.NORMAL,
     var isRunning: Boolean = false,
     var totalDaysSimulated: Int = 0,
-    var randomSeed: Long = System.currentTimeMillis()
+    var randomSeed: Long = System.currentTimeMillis(),
+    var lastTickRealTime: Long = System.currentTimeMillis()
 )
 
 enum class GameSpeed {

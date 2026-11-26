@@ -102,6 +102,12 @@
         tools:layout="@layout/fragment_banking" />
 
     <fragment
+        android:id="@+id/electionsFragment"
+        android:name="com.nairobisim.ui.elections.ElectionFragment"
+        android:label="Elections"
+        tools:layout="@layout/fragment_elections" />
+
+    <fragment
         android:id="@+id/leaderboardFragment"
         android:name="com.nairobisim.ui.leaderboard.LeaderboardFragment"
         android:label="@string/tab_leaderboard"

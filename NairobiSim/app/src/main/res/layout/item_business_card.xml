@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="@{&quot;Revenue: &quot; + viewModel.formatKes(business.monthlyRevenue)}"
+                    android:text="@{&quot;Profit: &quot; + viewModel.formatHourly(business.hourlyProfit)}"
                     android:textSize="11sp"
                     android:textColor="@color/nairobi_grey" />
 

@@ -25,6 +25,9 @@ interface PlayerProfileDao {
 interface BusinessDao {
     @Query("SELECT * FROM business WHERE isOperational = 1")
     fun getActiveBusinesses(): Flow<List<Business>>
+
+    @Query("SELECT * FROM business WHERE isOperational = 1")
+    suspend fun getActiveBusinessesOnce(): List<Business>
     
     @Query("SELECT * FROM business")
     fun getAllBusinesses(): Flow<List<Business>>
@@ -490,7 +493,48 @@ interface NpcPlayerDao {
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNpc(npc: NpcPlayer)
-    
+
     @Update
     suspend fun updateNpc(npc: NpcPlayer)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface TaxRecordDao {
+    @Query("SELECT * FROM tax_record ORDER BY createdAt DESC")
+    fun getAllRecords(): Flow<List<TaxRecord>>
+
+    @Query("SELECT * FROM tax_record ORDER BY createdAt DESC")
+    suspend fun getAllRecordsOnce(): List<TaxRecord>
+
+    @Query("SELECT * FROM tax_record WHERE period = :period")
+    suspend fun getRecordsForPeriod(period: String): List<TaxRecord>
+
+    @Query("SELECT * FROM tax_record WHERE id = :id")
+    suspend fun getRecord(id: String): TaxRecord?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRecord(record: TaxRecord)
+
+    @Update
+    suspend fun updateRecord(record: TaxRecord)
+}
+
+@Dao
+@TypeConverters(Converters::class)
+interface ElectionDao {
+    @Query("SELECT * FROM election ORDER BY createdAt DESC")
+    fun getAllElections(): Flow<List<Election>>
+
+    @Query("SELECT * FROM election WHERE id = :id")
+    suspend fun getElection(id: String): Election?
+
+    @Query("SELECT * FROM election WHERE stage != 'CONCLUDED' ORDER BY createdAt DESC")
+    fun getActiveElections(): Flow<List<Election>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertElection(election: Election)
+
+    @Update
+    suspend fun updateElection(election: Election)
 }

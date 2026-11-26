@@ -42,6 +42,11 @@
         android:title="@string/tab_banking" />
 
     <item
+        android:id="@+id/electionsFragment"
+        android:icon="@drawable/ic_megaphone"
+        android:title="Elections" />
+
+    <item
         android:id="@+id/nav_chama"
         android:icon="@drawable/ic_chama"
         android:title="Chama" />

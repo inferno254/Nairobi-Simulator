@@ -374,4 +374,39 @@ class Converters {
 
     @TypeConverter
     fun toPlayerType(value: String?): PlayerType? = value?.let { PlayerType.valueOf(it) }
+
+    // Tax converters
+    @TypeConverter
+    fun fromTaxType(value: TaxType?): String? = value?.name
+
+    @TypeConverter
+    fun toTaxType(value: String?): TaxType? = value?.let { TaxType.valueOf(it) }
+
+    // Election converters
+    @TypeConverter
+    fun fromOffice(value: Office?): String? = value?.name
+
+    @TypeConverter
+    fun toOffice(value: String?): Office? = value?.let { Office.valueOf(it) }
+
+    @TypeConverter
+    fun fromCandidateKind(value: CandidateKind?): String? = value?.name
+
+    @TypeConverter
+    fun toCandidateKind(value: String?): CandidateKind? = value?.let { CandidateKind.valueOf(it) }
+
+    @TypeConverter
+    fun fromElectionStage(value: ElectionStage?): String? = value?.name
+
+    @TypeConverter
+    fun toElectionStage(value: String?): ElectionStage? = value?.let { ElectionStage.valueOf(it) }
+
+    @TypeConverter
+    fun fromCandidateList(value: List<Candidate>?): String? = value?.let { gson.toJson(it) }
+
+    @TypeConverter
+    fun toCandidateList(value: String?): List<Candidate>? = value?.let {
+        val type = object : TypeToken<List<Candidate>>() {}.type
+        gson.fromJson(it, type)
+    }
 }

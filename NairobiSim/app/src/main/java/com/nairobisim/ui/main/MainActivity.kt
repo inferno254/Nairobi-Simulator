@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.bettingFragment -> binding.bottomNavigation.selectedItemId = R.id.nav_bribery
                 R.id.ponziFragment -> binding.bottomNavigation.selectedItemId = R.id.nav_bribery
                 R.id.bankingFragment -> binding.bottomNavigation.selectedItemId = R.id.nav_bribery
+                R.id.electionsFragment -> binding.bottomNavigation.selectedItemId = R.id.nav_bribery
             }
         }
     }

@@ -13,6 +13,7 @@ import com.nairobisim.R
 import com.nairobisim.databinding.FragmentDashboardBinding
 import com.nairobisim.model.Business
 import com.nairobisim.model.DailyTransaction
+import com.nairobisim.model.GameSpeed
 import com.nairobisim.model.MarketEvent
 import com.nairobisim.ui.main.MainViewModel
 import com.nairobisim.ui.main.MainViewModel.MainTab
@@ -63,6 +64,7 @@ class DashboardFragment : Fragment() {
     
     private fun observeData() {
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.executePendingBindings()
         
         viewModel.activeBusinesses.observe(viewLifecycleOwner) { businesses ->
@@ -107,7 +109,18 @@ class DashboardFragment : Fragment() {
             viewModel.setTab(MainTab.BUSINESSES)
             findNavController().navigate(R.id.startBusinessFragment)
         }
-        
+
+        binding.btnToggleRun.setOnClickListener { viewModel.toggleSimulation() }
+        binding.btnNextDay.setOnClickListener { viewModel.advanceDay() }
+        binding.btnSpeedSlow.setOnClickListener { viewModel.setGameSpeed(GameSpeed.SLOW) }
+        binding.btnSpeedNormal.setOnClickListener { viewModel.setGameSpeed(GameSpeed.NORMAL) }
+        binding.btnSpeedFast.setOnClickListener { viewModel.setGameSpeed(GameSpeed.FAST) }
+        binding.btnPayTaxes.setOnClickListener { viewModel.payTaxes() }
+
+        viewModel.unpaidTax.observe(viewLifecycleOwner) { amount ->
+            binding.txtUnpaidTax.text = viewModel.formatKes(amount ?: 0L)
+        }
+
         businessAdapter.onItemClick = { business ->
             viewModel.selectBusiness(business)
             val bundle = Bundle()

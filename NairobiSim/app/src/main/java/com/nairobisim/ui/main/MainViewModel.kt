@@ -15,6 +15,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = SimulationRepository(
         com.nairobisim.data.database.AppDatabase.getDatabase(application)
     )
+
+    private val taxRepository = com.nairobisim.data.repository.TaxRepository(
+        com.nairobisim.data.database.AppDatabase.getDatabase(application)
+    )
     
     // Exposed LiveData
     val playerProfile = repository.playerProfile
@@ -37,9 +41,60 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> = _toastMessage
-    
+
+    private val _clockText = MutableLiveData<String>("Day 1")
+    val clockText: LiveData<String> = _clockText
+
+    private val _isRunning = MutableLiveData<Boolean>(false)
+    val isRunning: LiveData<Boolean> = _isRunning
+
+    private val _unpaidTax = MutableLiveData<Long>(0L)
+    val unpaidTax: LiveData<Long> = _unpaidTax
+
     init {
         initializeData()
+        startClock()
+    }
+
+    // Auto-advancing in-game clock driven by simulation speed.
+    // Each real second advances the in-game clock by `gameMinutesPerSec` minutes and
+    // credits each business's hourly profit proportionally (continuous, smooth balance).
+    private fun startClock() {
+        viewModelScope.launch {
+            while (true) {
+                val state = repository.getSimulationState()
+                if (state != null) {
+                    _clockText.postValue(formatClock(state))
+                    _isRunning.postValue(state.isRunning)
+                    _unpaidTax.postValue(taxRepository.totalUnpaid())
+                    if (state.isRunning && state.gameSpeed != GameSpeed.PAUSED) {
+                        val gameMinutes = gameMinutesPerSecond(state.gameSpeed)
+                        repository.accrueTime(gameMinutes)
+                    }
+                }
+                kotlinx.coroutines.delay(1_000L)
+            }
+        }
+    }
+
+    // How many in-game minutes pass per real second at each speed.
+    private fun gameMinutesPerSecond(speed: GameSpeed): Long = when (speed) {
+        GameSpeed.SLOW -> 1L        // 1 day ≈ 24 min real
+        GameSpeed.NORMAL -> 15L     // 1 day ≈ 96 sec real
+        GameSpeed.FAST -> 60L       // 1 day ≈ 24 sec real
+        GameSpeed.VERY_FAST -> 240L // 1 day ≈ 6 sec real
+        GameSpeed.PAUSED -> 0L
+    }
+
+    private fun formatClock(state: SimulationState): String {
+        val cal = java.util.Calendar.getInstance().apply { time = state.currentDate }
+        val day = cal.get(java.util.Calendar.DAY_OF_MONTH)
+        val month = cal.get(java.util.Calendar.MONTH) + 1
+        val year = cal.get(java.util.Calendar.YEAR)
+        val hour = cal.get(java.util.Calendar.HOUR_OF_DAY)
+        val min = cal.get(java.util.Calendar.MINUTE)
+        val speed = if (state.isRunning) state.gameSpeed.displayName else "Paused"
+        return "Day $day/$month/$year  ${hour.toString().padStart(2,'0')}:${min.toString().padStart(2,'0')}  •  $speed"
     }
     
     private fun initializeData() {
@@ -56,6 +111,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 val newProfile = PlayerProfile(unlockRequirements = UnlockRequirements())
                 repository.initializePlayer(newProfile)
                 _isOnboardingComplete.postValue(false)
+            } else {
+                // Credit offline earnings accrued while the app was closed
+                repository.applyOfflineEarnings()
             }
         }
     }
@@ -224,6 +282,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _toastMessage.postValue("Advanced to next day")
         }
     }
+
+    fun payTaxes() {
+        viewModelScope.launch {
+            val bill = taxRepository.buildMonthlyBill(currentPeriod())
+            val paid = taxRepository.applyBill(bill)
+            _toastMessage.postValue(if (paid) "Paid KES ${bill.total} in taxes" else "Insufficient funds for taxes (KES ${bill.total})")
+            _unpaidTax.postValue(taxRepository.totalUnpaid())
+        }
+    }
+
+    private fun currentPeriod(): String {
+        val cal = java.util.Calendar.getInstance()
+        return "${cal.get(java.util.Calendar.YEAR)}-${(cal.get(java.util.Calendar.MONTH) + 1).toString().padStart(2, '0')}"
+    }
     
     fun selectBusiness(business: Business?) {
         _selectedBusiness.postValue(business)
@@ -235,6 +307,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     fun formatKes(amount: Long): String {
         return "KES ${String.format("%,d", amount)}"
+    }
+
+    fun formatHourly(amountPerHour: Double): String {
+        return "KES ${String.format("%,d", amountPerHour.toLong())} /hr"
     }
     
     enum class MainTab {
